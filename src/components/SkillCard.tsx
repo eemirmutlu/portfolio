@@ -40,8 +40,8 @@ const SkillCard: React.FC<{
             <img
               src={
                 open
-                  ? "../public/corner-left-up.svg"
-                  : "../public/corner-left-down.svg"
+                  ? "/corner-left-up.svg"
+                  : "/corner-left-down.svg"
               }
               alt="toggle icon"
               style={{ marginRight: 8 }}

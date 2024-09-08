@@ -5,7 +5,7 @@ import { useThemeContext } from "../contexts/ThemeContext";
 const HomeSkeleton: React.FC = () => {
   const isSmallScreen = useMediaQuery("(min-width: 450px)");
   const isMidScreen = useMediaQuery("(min-width: 1025px)");
-  const {isDarkMode} = useThemeContext()
+  const { isDarkMode } = useThemeContext();
 
   const customWidth = () => {
     if (isMidScreen) {
@@ -22,7 +22,7 @@ const HomeSkeleton: React.FC = () => {
       sx={{
         width: customWidth(),
         marginBottom: 2,
-        backgroundColor: isDarkMode ? 'rgb(0,0,0,.1)' : '',
+        backgroundColor: isDarkMode ? "rgb(0,0,0,.1)" : "",
       }}
     >
       <CardContent>
@@ -51,15 +51,42 @@ const HomeSkeleton: React.FC = () => {
   return (
     <Box
       sx={{
-        // bgcolor: "white",
         color: "#000000",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // minheight: "100vh",
+        padding: 0,
+        position: "relative",
       }}
     >
-      <Skeleton variant="text" width={"100%"} height={50} animation={"wave"} />
+      <Box
+        sx={{
+          width: "100%",
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <Skeleton
+          variant="rectangular"
+          width={40}
+          height={40}
+          sx={{
+            width: '100%',
+            position: "",
+            top: 0,
+            right: 0,
+            borderRadius: "50%",
+            alignSelf: 'flex-end'
+          }}
+          animation="wave"
+        />
+        <Skeleton
+          variant="text"
+          width={"100%"}
+          height={50}
+          animation={"wave"}
+        />
+      </Box>
       <Skeleton
         variant="text"
         width={"100%"}

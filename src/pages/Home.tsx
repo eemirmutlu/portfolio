@@ -121,21 +121,25 @@ const Home: React.FC = () => {
       </Helmet>
 
       {/* Dark Mode Toggle */}
-      <IconButton
-        onClick={toggleDarkMode}
-        sx={{ position: "absolute", top: isSmallScreen ? 100 : 16, right: 16 }}
-      >
-        {isDarkMode ? (
-          <LightModeIcon sx={{ color: "#fff" }} />
-        ) : (
-          <DarkModeIcon sx={{ color: "purple" }} />
-        )}
-      </IconButton>
 
       {isLoading ? (
         <HomeSkeleton />
       ) : (
         <>
+          <IconButton
+            onClick={toggleDarkMode}
+            sx={{
+              position: "absolute",
+              top: isSmallScreen ? 100 : 16,
+              right: 16,
+            }}
+          >
+            {isDarkMode ? (
+              <LightModeIcon sx={{ color: "#fff" }} />
+            ) : (
+              <DarkModeIcon sx={{ color: "purple" }} />
+            )}
+          </IconButton>
           <Typography
             variant="h2"
             sx={{

@@ -80,39 +80,63 @@ const Projects: React.FC = () => {
       <Helmet>
         <title>{isLoading ? "Loading..." : "Projects • Emir Mutlu"}</title>
       </Helmet>
-      <IconButton
-        onClick={toggleDarkMode}
-        sx={{ position: "absolute", top: isSmallScreen ? 100 : 16, right: 16 }}
-      >
-        {isDarkMode ? (
-          <LightModeIcon sx={{ color: "#fff" }} />
-        ) : (
-          <DarkModeIcon sx={{ color: "purple" }} />
-        )}
-      </IconButton>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         {isLoading ? (
-          <Skeleton
-            variant="text"
-            sx={{
-              fontSize: "2rem",
-              width: "50%",
-              margin: "0 auto",
-              height: "2.5rem",
-              display: "inline-block",
-            }}
-          />
+          <>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Skeleton
+                variant="rectangular"
+                width={40}
+                height={40}
+                sx={{
+                  width: "100%",
+                  position: "",
+                  top: 0,
+                  right: 0,
+                  borderRadius: "50%",
+                  alignSelf: "flex-end",
+                }}
+                animation="wave"
+              />
+              <Skeleton
+                variant="text"
+                sx={{
+                  fontSize: "2rem",
+                  width: "50%",
+                  margin: "0 auto",
+                  height: "2.5rem",
+                  display: "inline-block",
+                }}
+              />
+            </Box>
+          </>
         ) : (
-          <Typography
-            variant="h4"
-            component="h1"
-            sx={{
-              fontWeight: "bold",
-              color: isDarkMode ? "white" : "purple",
-            }}
-          >
-            My Projects
-          </Typography>
+          <>
+            <IconButton
+              onClick={toggleDarkMode}
+              sx={{
+                position: "absolute",
+                top: isSmallScreen ? 100 : 16,
+                right: 16,
+              }}
+            >
+              {isDarkMode ? (
+                <LightModeIcon sx={{ color: "#fff" }} />
+              ) : (
+                <DarkModeIcon sx={{ color: "purple" }} />
+              )}
+            </IconButton>
+            <Typography
+              variant="h4"
+              component="h1"
+              sx={{
+                fontWeight: "bold",
+                color: isDarkMode ? "white" : "purple",
+              }}
+            >
+              My Projects
+            </Typography>
+          </>
         )}
       </Box>
       <Grid container spacing={4}>

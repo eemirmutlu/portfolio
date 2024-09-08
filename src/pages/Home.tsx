@@ -5,6 +5,7 @@ import {
   Container,
   useMediaQuery,
   IconButton,
+  Box,
 } from "@mui/material";
 import { useThemeContext } from "../contexts/ThemeContext";
 import DocumentViewer from "../components/DocumentViewer";
@@ -110,17 +111,20 @@ const Home: React.FC = () => {
   return (
     <Container
       sx={{
+        width: "100%",
         bgcolor: isDarkMode ? "#1E1B29" : "#ffffff",
         color: isDarkMode ? "#E0E0E0" : "#000000",
-        padding: 4,
+        padding: 2,
         minHeight: "100vh",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <Helmet>
         <title>{isLoading ? "Loading..." : "Home • Emir Mutlu"}</title>
       </Helmet>
-
-      {/* Dark Mode Toggle */}
 
       {isLoading ? (
         <HomeSkeleton />
@@ -130,8 +134,9 @@ const Home: React.FC = () => {
             onClick={toggleDarkMode}
             sx={{
               position: "absolute",
-              top: isSmallScreen ? 100 : 16,
+              top: 16,
               right: 16,
+              zIndex: 1,
             }}
           >
             {isDarkMode ? (
@@ -150,15 +155,34 @@ const Home: React.FC = () => {
               borderRight: "3px solid",
               animation: "blink 0.75s step-end infinite",
               color: isDarkMode ? "#4C4A7E" : "#6A61A1", // Dark navy or purple
-              fontSize: isSmallScreen ? "20px" : "50px",
+              fontSize: isSmallScreen ? "1.5rem" : "2.5rem",
+              width: "auto", // Center align text
+              position: "relative", // Ensure proper positioning
+              textAlign: "start",
             }}
           >
             {displayText}
+            {/* Placeholder for the blinking cursor effect */}
+            <Box
+              sx={{
+                position: "absolute",
+                right: 0,
+                top: "0",
+                height: "100%",
+                borderRight: "3px solid",
+                animation: "blink 0.75s step-end infinite",
+              }}
+            />
           </Typography>
 
           <Typography
             variant="h5"
-            sx={{ mb: 2, fontSize: isSmallScreen ? "15px" : "30px" }}
+            sx={{
+              mb: 2,
+              fontSize: isSmallScreen ? "1rem" : "1.25rem",
+              width: "100%",
+              paddingX: isSmallScreen ? 2 : 0,
+            }}
           >
             Hello, I'm Emir. Let me introduce myself. I was born in{" "}
             <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>Turkey</b>{" "}
@@ -204,6 +228,7 @@ const Home: React.FC = () => {
                 backgroundColor: "#6A61A1",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
               },
+              alignSelf: "flex-start",
             }}
           >
             View CV
@@ -223,20 +248,34 @@ const Home: React.FC = () => {
             sx={{
               bgcolor: isDarkMode ? "#1E1B29" : "#ffffff",
               padding: 4,
+              // maxWidth: "lg",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
             <Typography variant="h4" sx={{ marginBottom: 4 }}>
               My Skills
             </Typography>
 
-            {skills.map((skill, index) => (
-              <SkillCard
-                key={index}
-                name={skill.name}
-                level={skill.level}
-                description={skill.description}
-              />
-            ))}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: isSmallScreen ? "column" : "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                gap: 2,
+              }}
+            >
+              {skills.map((skill, index) => (
+                <SkillCard
+                  key={index}
+                  name={skill.name}
+                  level={skill.level}
+                  description={skill.description}
+                />
+              ))}
+            </Box>
           </Container>
         </>
       )}

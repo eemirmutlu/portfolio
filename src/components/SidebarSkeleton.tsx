@@ -5,12 +5,13 @@ import { useThemeContext } from "../contexts/ThemeContext";
 
 const SidebarSkeleton: React.FC = () => {
   const isSmallScreen = useMediaQuery("(max-width:1024px)");
+  const isMidScreen = useMediaQuery("(max-width:1550px)");
   const { isDarkMode } = useThemeContext();
 
   return (
     <Box
       sx={{
-        width: 320,
+        width: isMidScreen ? 200 : 320,
         height: "100vh",
         backgroundColor: isDarkMode ? "#1E1B29" : "unset",
         position: "fixed",
@@ -32,7 +33,7 @@ const SidebarSkeleton: React.FC = () => {
 
       <Box
         sx={{
-          width: 320,
+          width: isMidScreen ? 200 : 320,
           height: "100vh",
           padding: 0,
           backgroundColor: isDarkMode ? "#1E1B29" : "white",
@@ -53,10 +54,10 @@ const SidebarSkeleton: React.FC = () => {
             backgroundColor: "unset",
           }}
         >
-          <Skeleton variant="circular" width={100} height={100} />
+          <Skeleton variant="circular" width={isMidScreen ? 50 : 100} height={isMidScreen ? 50 : 100} />
           <Box sx={{ marginLeft: 2 }}>
-            <Skeleton variant="text" width={150} height={30} />
-            <Skeleton variant="text" width={150} height={30} sx={{ mt: 1 }} />
+            <Skeleton variant="text" width={isMidScreen ? 75 : 150} height={30} />
+            <Skeleton variant="text" width={isMidScreen ? 75 : 150} height={30} sx={{ mt: 1 }} />
           </Box>
         </Box>
         <Box

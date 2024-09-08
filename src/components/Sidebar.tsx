@@ -33,7 +33,8 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
   const { isDarkMode } = useThemeContext();
 
-  const isSmallScreen = useMediaQuery("(max-width: 1440px)");
+  const isSmallScreen = useMediaQuery("(max-width: 1550px)");
+
 
   // const clickSound = new Audio("../public/click2.mp3");
 
@@ -83,13 +84,13 @@ const Sidebar: React.FC = () => {
       sx={{
         display: "grid",
         gridTemplateColumns: "11fr 1fr",
-        backgroundColor: isDarkMode ? "darkblue" : "purple",
+        backgroundColor: isDarkMode ? "#1E1B29" : "white",
         paddingTop: "32px",
       }}
     >
       <Box
         sx={{
-          width: isSmallScreen ? 240 : 320,
+          width: isSmallScreen ? 200 : 320,
           height: "100vh",
           padding: 0,
           backgroundColor: isDarkMode ? "#1E1B29" : "white",
@@ -116,15 +117,15 @@ const Sidebar: React.FC = () => {
               alt={user.login}
               src={user.avatar_url}
               sx={{
-                width: isSmallScreen ? 60 : 100,
-                height: isSmallScreen ? 60 : 100,
+                width: isSmallScreen ? 50 : 100,
+                height: isSmallScreen ? 50 : 100,
                 marginBottom: 2,
                 // border: "5px solid white",
                 border: isDarkMode ? '5px solid rgb(128, 0, 128, .2)' : '5px solid white',
               }}
             />
           </Tooltip>
-          <Typography variant="h6" gutterBottom sx={{ marginLeft: 2 }}>
+          <Typography variant="h6" gutterBottom sx={{ marginLeft: 2, fontSize: isSmallScreen ? '16px' : '' }}>
             {user.login ? user.login : "Undefined"}
           </Typography>
         </Box>
@@ -231,7 +232,7 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faGithub} size="2x" color="white" />
+              <FontAwesomeIcon icon={faGithub} size={isSmallScreen ? '1x' : "2x"} color="white" />
             </a>
           </Tooltip>
           <Tooltip title="Discord">
@@ -240,7 +241,7 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faDiscord} size="2x" color="white" />
+              <FontAwesomeIcon icon={faDiscord} size={isSmallScreen ? '1x' : "2x"} color="white" />
             </a>
           </Tooltip>
           <Tooltip title="Instagram">
@@ -249,7 +250,7 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faInstagram} size="2x" color="white" />
+              <FontAwesomeIcon icon={faInstagram} size={isSmallScreen ? '1x' : "2x"} color="white" />
             </a>
           </Tooltip>
           <Tooltip title="LinkedIn">
@@ -258,7 +259,7 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faLinkedin} size="2x" color="white" />
+              <FontAwesomeIcon icon={faLinkedin} size={isSmallScreen ? '1x' : "2x"} color="white" />
             </a>
           </Tooltip>
         </Box>

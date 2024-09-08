@@ -35,13 +35,6 @@ const Sidebar: React.FC = () => {
 
   const isSmallScreen = useMediaQuery("(max-width: 1550px)");
 
-
-  // const clickSound = new Audio("../public/click2.mp3");
-
-  // const playClickSound = () => {
-  //   clickSound.play();
-  // };
-
   useEffect(() => {
     const loadUser = async () => {
       try {
@@ -76,7 +69,6 @@ const Sidebar: React.FC = () => {
 
   const handleNavigate = (path: string) => {
     navigate(path);
-    // playClickSound()
   };
 
   return (
@@ -120,12 +112,17 @@ const Sidebar: React.FC = () => {
                 width: isSmallScreen ? 50 : 100,
                 height: isSmallScreen ? 50 : 100,
                 marginBottom: 2,
-                // border: "5px solid white",
-                border: isDarkMode ? '5px solid rgb(128, 0, 128, .2)' : '5px solid white',
+                border: isDarkMode
+                  ? "5px solid rgb(128, 0, 128, .2)"
+                  : "5px solid white",
               }}
             />
           </Tooltip>
-          <Typography variant="h6" gutterBottom sx={{ marginLeft: 2, fontSize: isSmallScreen ? '16px' : '' }}>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ marginLeft: 2, fontSize: isSmallScreen ? "16px" : "" }}
+          >
             {user.login ? user.login : "Undefined"}
           </Typography>
         </Box>
@@ -135,7 +132,6 @@ const Sidebar: React.FC = () => {
           sx={{
             color: "white",
             borderRadius: location.pathname === "/" ? "0px 0px 12px 0px" : "",
-            // backgroundColor: "purple",
             backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             padding: "24px",
           }}
@@ -143,7 +139,6 @@ const Sidebar: React.FC = () => {
           {user.bio || "No bio available"}
         </Typography>
         <Button
-          // className={location.pathname === "/" ? "active" : ""}
           className={
             location.pathname === "/"
               ? isDarkMode
@@ -157,8 +152,7 @@ const Sidebar: React.FC = () => {
             height: "96px",
             textAlign: "left",
             color: "white",
-            // backgroundColor: "purple",
-            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             borderRadius:
               location.pathname === "/projects" ? "0px 0px 12px 0px" : "",
             transition: "background-color linear 0.2s",
@@ -168,7 +162,6 @@ const Sidebar: React.FC = () => {
           Home
         </Button>
         <Button
-          // className={location.pathname === "/projects" ? "active" : ""}
           className={
             location.pathname === "/projects"
               ? isDarkMode
@@ -182,8 +175,7 @@ const Sidebar: React.FC = () => {
             height: "96px",
             textAlign: "left",
             color: "white",
-            // backgroundColor: "purple",
-            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             transition: "background-color linear 0.2s",
             borderRadius: location.pathname === "/" ? "0px 12px 0px 0px" : "",
           }}
@@ -191,38 +183,14 @@ const Sidebar: React.FC = () => {
         >
           Projects
         </Button>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            // backgroundColor: "purple",
-            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
-            borderRadius:
-              location.pathname === "/projects" ? "0px 12px 0px 0px" : "",
-            height: "24px",
-          }}
-        >
-          {/* <Typography
-            variant="body2"
-            sx={{ mr: 1, color: "white", display: "none" }}
-          >
-            Dark Mode
-          </Typography>
-          <Switch
-            checked={isDarkMode}
-            onChange={toggleDarkMode}
-            inputProps={{ "aria-label": "dark mode toggle" }}
-            sx={{ display: "none" }}
-          /> */}
-        </Box>
+
         <Box
           height={"100%"}
           sx={{
             display: "flex",
             alignItems: "end",
             justifyContent: "space-evenly",
-            // backgroundColor: "purple",
-            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             padding: "50px",
           }}
         >
@@ -232,7 +200,11 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faGithub} size={isSmallScreen ? '1x' : "2x"} color="white" />
+              <FontAwesomeIcon
+                icon={faGithub}
+                size={isSmallScreen ? "1x" : "2x"}
+                color="white"
+              />
             </a>
           </Tooltip>
           <Tooltip title="Discord">
@@ -241,7 +213,11 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faDiscord} size={isSmallScreen ? '1x' : "2x"} color="white" />
+              <FontAwesomeIcon
+                icon={faDiscord}
+                size={isSmallScreen ? "1x" : "2x"}
+                color="white"
+              />
             </a>
           </Tooltip>
           <Tooltip title="Instagram">
@@ -250,7 +226,11 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faInstagram} size={isSmallScreen ? '1x' : "2x"} color="white" />
+              <FontAwesomeIcon
+                icon={faInstagram}
+                size={isSmallScreen ? "1x" : "2x"}
+                color="white"
+              />
             </a>
           </Tooltip>
           <Tooltip title="LinkedIn">
@@ -259,9 +239,28 @@ const Sidebar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faLinkedin} size={isSmallScreen ? '1x' : "2x"} color="white" />
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                size={isSmallScreen ? "1x" : "2x"}
+                color="white"
+              />
             </a>
           </Tooltip>
+        </Box>
+
+        {/* Footer */}
+        <Box
+          sx={{
+            textAlign: "center",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            color: isDarkMode ? "white" : "black",
+            padding: "16px",
+            fontSize: "12px",
+          }}
+        >
+          <Typography fontSize={isSmallScreen ? '8px' : '12px'} color='rgb(255,255,255,.5)'>
+            Copyright © 2024, Emir Mutlu, All rights reserved
+          </Typography>
         </Box>
       </Box>
       <Box

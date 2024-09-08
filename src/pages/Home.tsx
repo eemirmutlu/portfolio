@@ -123,7 +123,13 @@ const Home: React.FC = () => {
       }}
     >
       <Helmet>
-        <title>{isLoading ? "Loading..." : "Home • Emir Mutlu"}</title>
+        <title>
+          {openViewer
+            ? `${documentData.title} • Emir Mutlu`
+            : isLoading
+            ? "Loading..."
+            : "Home • Emir Mutlu"}
+        </title>
       </Helmet>
 
       {isLoading ? (
@@ -162,7 +168,6 @@ const Home: React.FC = () => {
             }}
           >
             {displayText}
-            {/* Placeholder for the blinking cursor effect */}
             <Box
               sx={{
                 position: "absolute",
@@ -248,7 +253,6 @@ const Home: React.FC = () => {
             sx={{
               bgcolor: isDarkMode ? "#1E1B29" : "#ffffff",
               padding: 4,
-              // maxWidth: "lg",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

@@ -35,7 +35,6 @@ const Projects: React.FC = () => {
   const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
   const [hasError, setHasError] = useState(false);
   const theme = useTheme();
-  // const { isDarkMode } = useThemeContext();
   const { isDarkMode, toggleDarkMode } = useThemeContext();
   const isSmallScreen = useMediaQuery("(max-width:500px)");
 
@@ -78,7 +77,13 @@ const Projects: React.FC = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Helmet>
-        <title>{isLoading ? "Loading..." : "Projects • Emir Mutlu"}</title>
+        <title>
+          {selectedRepo
+            ? `${selectedRepo.name} • Emir Mutlu`
+            : isLoading
+            ? "Loading..."
+            : "Projects • Emir Mutlu"}
+        </title>
       </Helmet>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         {isLoading ? (

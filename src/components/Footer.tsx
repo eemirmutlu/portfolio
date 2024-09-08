@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
         variant="body2"
         sx={{ color: "rgb(255,255,255,.5)", textAlign: "center", marginTop: "16px" }}
       >
-        Copyright © 2024, Emir Mutlu, All rights reserved
+        Copyright © 2024, Emir Mutlu, All rights reserved.
       </Typography>
     </Box>
   );

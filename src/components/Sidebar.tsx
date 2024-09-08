@@ -259,7 +259,7 @@ const Sidebar: React.FC = () => {
           }}
         >
           <Typography fontSize={isSmallScreen ? '8px' : '12px'} color='rgb(255,255,255,.5)'>
-            Copyright © 2024, Emir Mutlu, All rights reserved
+            Copyright © 2024, Emir Mutlu, All rights reserved.
           </Typography>
         </Box>
       </Box>

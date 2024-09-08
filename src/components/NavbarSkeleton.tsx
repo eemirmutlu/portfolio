@@ -43,7 +43,7 @@ const NavbarSkeleton: React.FC = () => {
           variant="circular"
           width={70}
           height={70}
-          sx={{ border: "5px solid #1E1B29" }}
+          sx={{ border: isDarkMode ? "5px solid #1E1B29" : '5px solid rgb(0,0,0,.1)' }}
         />
         <Box sx={{ marginLeft: 2 }}>
           <Skeleton variant="text" width={100} height={30} />

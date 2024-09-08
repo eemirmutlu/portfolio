@@ -9,7 +9,6 @@ import {
   ButtonBase,
 } from "@mui/material";
 
-// SkillCard component
 const SkillCard: React.FC<{
   name: string;
   level: number;
@@ -32,6 +31,7 @@ const SkillCard: React.FC<{
           bgcolor: open ? "#f4f4f4" : "white",
           width: "100%",
         }}
+        onClick={toggleDescription}
       >
         <CardContent>
           <Box sx={{ display: "flex", alignItems: "center", }}>
@@ -43,7 +43,6 @@ const SkillCard: React.FC<{
               }
               alt="toggle icon"
               style={{ marginRight: 8 }}
-              onClick={toggleDescription}
             />
             <Typography variant="h6">{name}</Typography>
           </Box>

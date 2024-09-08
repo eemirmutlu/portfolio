@@ -2,11 +2,13 @@
 
 import React from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
+import { useThemeContext } from "../contexts/ThemeContext";
 // import { useNavigate } from "react-router-dom";
 
 const ErrorPage: React.FC = () => {
   // const navigate = useNavigate();
   const isSmallScreen = useMediaQuery("(media-screen:500px)");
+  const { isDarkMode } = useThemeContext();
 
   // const handleGoBack = () => {
   //   navigate(-1);
@@ -20,8 +22,9 @@ const ErrorPage: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "100%",
-        bgcolor: "background.default",
+        bgcolor: isDarkMode ? "" : "background.default",
         textAlign: "center",
+        color: isDarkMode ? "white" : "black",
       }}
     >
       <img
@@ -29,7 +32,12 @@ const ErrorPage: React.FC = () => {
         alt=""
         width={!isSmallScreen ? "125px" : ""}
       />
-      <Typography fontFamily={"monospace"} variant="h4" component="h1" sx={{ mb: 2 }}>
+      <Typography
+        fontFamily={"monospace"}
+        variant="h4"
+        component="h1"
+        sx={{ mb: 2 }}
+      >
         Oops! Something Went Wrong
       </Typography>
       <Typography fontFamily={"monospace"} variant="body1" sx={{ mb: 4 }}>

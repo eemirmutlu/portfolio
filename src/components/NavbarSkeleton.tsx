@@ -4,11 +4,12 @@ import {
   Skeleton,
   useMediaQuery,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 const NavbarSkeleton: React.FC = () => {
-  const location = useLocation();
   const isSmallScreen = useMediaQuery("(max-width:450px)");
+  const {isDarkMode} = useThemeContext();
+
 
   return (
     <Box
@@ -20,9 +21,9 @@ const NavbarSkeleton: React.FC = () => {
         top: 0,
         left: 0,
         zIndex: "99",
-        backgroundColor: "unset",
+        // backgroundColor: "unset",
+        bgcolor: isDarkMode ? '#1E1B29' : 'unset',
         height: "100px",
-        padding: "10px",
       }}
     >
       <Box
@@ -35,7 +36,6 @@ const NavbarSkeleton: React.FC = () => {
           paddingLeft: "10px",
           width: "100%",
           height: "100%",
-          borderRadius: location.pathname === "/" ? "0px 0px 24px 0px" : "",
           backgroundColor: "unset",
         }}
       >
@@ -43,7 +43,7 @@ const NavbarSkeleton: React.FC = () => {
           variant="circular"
           width={70}
           height={70}
-          sx={{ border: "5px solid white" }}
+          sx={{ border: "5px solid #1E1B29" }}
         />
         <Box sx={{ marginLeft: 2 }}>
           <Skeleton variant="text" width={100} height={30} />
@@ -55,7 +55,7 @@ const NavbarSkeleton: React.FC = () => {
           />
         </Box>
       </Box>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", paddingRight: 1 }}>
         <Skeleton
           variant="rectangular"
           width={70}

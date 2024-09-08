@@ -12,10 +12,15 @@ import {
   Box,
   Avatar,
   Skeleton,
+  IconButton,
+  useMediaQuery,
 } from "@mui/material";
 import ProjectViewer from "../components/ProjectViewer";
 import ErrorPage from "../components/ErrorPage";
 import { Helmet } from "react-helmet";
+import { useThemeContext } from "../contexts/ThemeContext";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 interface Repository {
   id: number;
@@ -30,6 +35,9 @@ const Projects: React.FC = () => {
   const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
   const [hasError, setHasError] = useState(false);
   const theme = useTheme();
+  // const { isDarkMode } = useThemeContext();
+  const { isDarkMode, toggleDarkMode } = useThemeContext();
+  const isSmallScreen = useMediaQuery("(max-width:500px)");
 
   useEffect(() => {
     const loadRepositories = async () => {
@@ -68,13 +76,20 @@ const Projects: React.FC = () => {
   }
 
   return (
-    <Container
-      maxWidth="lg"
-      sx={{ mt: 4, mb: 4, bgcolor: theme.palette.background.default }}
-    >
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Helmet>
         <title>{isLoading ? "Loading..." : "Projects • Emir Mutlu"}</title>
       </Helmet>
+      <IconButton
+        onClick={toggleDarkMode}
+        sx={{ position: "absolute", top: isSmallScreen ? 100 : 16, right: 16 }}
+      >
+        {isDarkMode ? (
+          <LightModeIcon sx={{ color: "#fff" }} />
+        ) : (
+          <DarkModeIcon sx={{ color: "purple" }} />
+        )}
+      </IconButton>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         {isLoading ? (
           <Skeleton
@@ -91,7 +106,10 @@ const Projects: React.FC = () => {
           <Typography
             variant="h4"
             component="h1"
-            sx={{ fontWeight: "bold", color: "purple" }}
+            sx={{
+              fontWeight: "bold",
+              color: isDarkMode ? "white" : "purple",
+            }}
           >
             My Projects
           </Typography>
@@ -106,9 +124,12 @@ const Projects: React.FC = () => {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    boxShadow:
-                      "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
-                    backgroundColor: "rgb(255,255,255, .8)",
+                    boxShadow: `15px 15px 30px ${
+                      isDarkMode ? "#1E1B29" : "#bebebe"
+                    }, -15px -15px 30px ${isDarkMode ? "#1E1B29" : "#ffffff"}`,
+                    backgroundColor: isDarkMode
+                      ? "#1E1B29"
+                      : "rgb(255,255,255, .8)",
                     borderRadius: 2,
                     overflow: "hidden",
                   }}
@@ -143,9 +164,12 @@ const Projects: React.FC = () => {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    boxShadow:
-                      "15px 15px 30px #bebebe, -15px -15px 30px #ffffff",
-                    backgroundColor: "rgb(255,255,255, .8)",
+                    boxShadow: `15px 15px 30px ${
+                      isDarkMode ? "#1E1B29" : "#bebebe"
+                    }, -15px -15px 30px ${isDarkMode ? "#1E1B29" : "#ffffff"}`,
+                    backgroundColor: isDarkMode
+                      ? "#1E1B29"
+                      : "rgb(255,255,255, .8)",
                     borderRadius: 2,
                     transition: "transform 0.3s, box-shadow 0.3s",
                     overflow: "hidden",
@@ -174,18 +198,33 @@ const Projects: React.FC = () => {
                           mb: 2,
                         }}
                       >
-                        <Avatar sx={{ backgroundColor: "purple", mr: 2 }}>
+                        <Avatar
+                          sx={{
+                            backgroundColor: isDarkMode ? "#660081" : "purple",
+                            mr: 2,
+                            color: "white",
+                          }}
+                        >
                           {repo.name[0].toUpperCase()}
                         </Avatar>
                         <Typography
                           variant="h6"
                           component="div"
-                          sx={{ fontWeight: "bold" }}
+                          sx={{
+                            fontWeight: "bold",
+                            color: isDarkMode ? "#ffffff" : "#000000",
+                          }}
                         >
                           {repo.name}
                         </Typography>
                       </Box>
-                      <Typography variant="body2" sx={{ mb: 2 }}>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          mb: 2,
+                          color: isDarkMode ? "#ffffff" : "#000000",
+                        }}
+                      >
                         {repo.description || "No description available"}
                       </Typography>
                       <Box>
@@ -194,7 +233,7 @@ const Projects: React.FC = () => {
                           color="primary"
                           size="small"
                           sx={{
-                            backgroundColor: "purple",
+                            backgroundColor: isDarkMode ? "#660081" : "purple",
                             color: "white",
                           }}
                         />

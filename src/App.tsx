@@ -24,7 +24,7 @@ const App: React.FC = () => {
         <Box
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === "dark" ? "rgb(0, 0, 0, .6)" : "white",
+              theme.palette.mode === "dark" ? "#1E1B29" : "white",
             borderRadius: "24px 0px 0px 0px",
             margin: 0,
             padding: 0,

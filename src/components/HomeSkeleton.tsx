@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Card, CardContent, Skeleton, useMediaQuery } from "@mui/material";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 const HomeSkeleton: React.FC = () => {
   const isSmallScreen = useMediaQuery("(min-width: 450px)");
   const isMidScreen = useMediaQuery("(min-width: 1025px)");
+  const {isDarkMode} = useThemeContext()
 
   const customWidth = () => {
     if (isMidScreen) {
@@ -20,6 +22,7 @@ const HomeSkeleton: React.FC = () => {
       sx={{
         width: customWidth(),
         marginBottom: 2,
+        backgroundColor: isDarkMode ? 'rgb(0,0,0,.1)' : '',
       }}
     >
       <CardContent>
@@ -48,7 +51,7 @@ const HomeSkeleton: React.FC = () => {
   return (
     <Box
       sx={{
-        bgcolor: "white",
+        // bgcolor: "white",
         color: "#000000",
         display: "flex",
         flexDirection: "column",
@@ -80,7 +83,6 @@ const HomeSkeleton: React.FC = () => {
       />
       <Box
         sx={{
-          bgcolor: "white",
           color: "#000000",
           display: "flex",
           flexDirection: "column",

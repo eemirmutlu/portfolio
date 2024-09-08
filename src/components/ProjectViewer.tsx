@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Triangle } from "react-loader-spinner";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 interface ProjectViewerProps {
   open: boolean;
@@ -27,26 +28,33 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
   repoUrl,
   isLoading,
 }) => {
-  const isSmallScreen = useMediaQuery('(min-width:500px)')
+  const isSmallScreen = useMediaQuery("(min-width:500px)");
+  const { isDarkMode } = useThemeContext();
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth sx={{}}>
       <DialogTitle
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          backgroundColor: isDarkMode ? "#1E1B29" : "",
         }}
       >
-        <Typography variant="h6">{repoName}</Typography>
+        <Typography color={isDarkMode ? 'white' : 'purple'} variant="h6">{repoName}</Typography>
         <IconButton
           aria-label="close"
           onClick={onClose}
-          sx={{ color: "purple" }}
+          sx={{ color: isDarkMode ? "white" : "purple" }}
         >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
+      <DialogContent
+        sx={{
+          backgroundColor: isDarkMode ? "#1E1B29" : "",
+        }}
+        dividers
+      >
         {isLoading ? (
           <Box
             sx={{
@@ -54,6 +62,7 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
               justifyContent: "center",
               alignItems: "center",
               height: "200px",
+              backgroundColor: isDarkMode ? "#1E1B29" : "",
             }}
           >
             <Triangle
@@ -68,6 +77,9 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
           </Box>
         ) : (
           <div
+            style={{
+              backgroundColor: isDarkMode ? "rgb(128,0,128,.2)" : "#121212",
+            }}
             className="folder-structure"
             onClick={() => window.open(repoUrl, "_blank")}
           >
@@ -87,7 +99,10 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
               <div className="file">utils/</div>
             </div>
             <div className="overlay">
-              <Typography variant="h6" sx={{ fontSize: !isSmallScreen ? '15px' : '30px' }}>
+              <Typography
+                variant="h6"
+                sx={{ fontSize: !isSmallScreen ? "15px" : "30px" }}
+              >
                 Click to visit <i>{repoName}</i> repository...
               </Typography>
             </div>

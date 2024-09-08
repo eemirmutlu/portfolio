@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Avatar, Button, Tooltip, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Avatar,
+  Button,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useThemeContext } from "../contexts/ThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,8 +31,9 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   useThemeContext();
   const location = useLocation();
+  const { isDarkMode } = useThemeContext();
 
-  const isSmallScreen = useMediaQuery('(max-width: 1440px)')
+  const isSmallScreen = useMediaQuery("(max-width: 1440px)");
 
   // const clickSound = new Audio("../public/click2.mp3");
 
@@ -75,7 +83,7 @@ const Sidebar: React.FC = () => {
       sx={{
         display: "grid",
         gridTemplateColumns: "11fr 1fr",
-        backgroundColor: "purple",
+        backgroundColor: isDarkMode ? "darkblue" : "purple",
         paddingTop: "32px",
       }}
     >
@@ -84,7 +92,7 @@ const Sidebar: React.FC = () => {
           width: isSmallScreen ? 240 : 320,
           height: "100vh",
           padding: 0,
-          backgroundColor: "white",
+          backgroundColor: isDarkMode ? "#1E1B29" : "white",
           position: "fixed",
           top: 0,
           left: 0,
@@ -99,7 +107,7 @@ const Sidebar: React.FC = () => {
             alignItems: "center",
             cursor: "pointer",
             padding: "24px",
-            backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
           }}
           onClick={handleProfileClick}
         >
@@ -111,12 +119,13 @@ const Sidebar: React.FC = () => {
                 width: isSmallScreen ? 60 : 100,
                 height: isSmallScreen ? 60 : 100,
                 marginBottom: 2,
-                border: "5px solid white",
+                // border: "5px solid white",
+                border: isDarkMode ? '5px solid rgb(128, 0, 128, .2)' : '5px solid white',
               }}
             />
           </Tooltip>
           <Typography variant="h6" gutterBottom sx={{ marginLeft: 2 }}>
-            {user.login ? user.login : 'Undefined'}
+            {user.login ? user.login : "Undefined"}
           </Typography>
         </Box>
         <Typography
@@ -125,49 +134,57 @@ const Sidebar: React.FC = () => {
           sx={{
             color: "white",
             borderRadius: location.pathname === "/" ? "0px 0px 12px 0px" : "",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             padding: "24px",
           }}
         >
           {user.bio || "No bio available"}
         </Typography>
         <Button
-          className={location.pathname === "/" ? "active" : ""}
+          // className={location.pathname === "/" ? "active" : ""}
+          className={
+            location.pathname === "/"
+              ? isDarkMode
+                ? "dark-mode-active"
+                : "active"
+              : ""
+          }
           onClick={() => handleNavigate("/")}
           sx={{
             width: "100%",
             height: "96px",
             textAlign: "left",
             color: "white",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             borderRadius:
               location.pathname === "/projects" ? "0px 0px 12px 0px" : "",
             transition: "background-color linear 0.2s",
-            ":hover": {
-              backgroundColor:
-                location.pathname === "/projects" ? "purple" : "white",
-              color: location.pathname === "/projects" ? "white" : "purple",
-            },
           }}
           disableRipple
         >
           Home
         </Button>
         <Button
-          className={location.pathname === "/projects" ? "active" : ""}
+          // className={location.pathname === "/projects" ? "active" : ""}
+          className={
+            location.pathname === "/projects"
+              ? isDarkMode
+                ? "dark-mode-active"
+                : "active"
+              : ""
+          }
           onClick={() => handleNavigate("/projects")}
           sx={{
             width: "100%",
             height: "96px",
             textAlign: "left",
             color: "white",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             transition: "background-color linear 0.2s",
             borderRadius: location.pathname === "/" ? "0px 12px 0px 0px" : "",
-            ":hover": {
-              backgroundColor: location.pathname === "/" ? "purple" : "white",
-              color: location.pathname === "/" ? "white" : "purple",
-            },
           }}
           disableRipple
         >
@@ -177,7 +194,8 @@ const Sidebar: React.FC = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             borderRadius:
               location.pathname === "/projects" ? "0px 12px 0px 0px" : "",
             height: "24px",
@@ -202,7 +220,8 @@ const Sidebar: React.FC = () => {
             display: "flex",
             alignItems: "end",
             justifyContent: "space-evenly",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             padding: "50px",
           }}
         >

@@ -26,6 +26,7 @@ const Navbar: React.FC = () => {
   useThemeContext();
   const location = useLocation();
   const isSmallScreen = useMediaQuery("(max-width:450px)");
+  const { isDarkMode } = useThemeContext();
   // const clickSound = new Audio("../public/click.mp3");
 
   // const playClickSound = () => {
@@ -81,7 +82,8 @@ const Navbar: React.FC = () => {
         top: 0,
         left: 0,
         zIndex: "99",
-        backgroundColor: 'white'
+        // backgroundColor: 'white'
+        backgroundColor: isDarkMode ? "#1E1B29" : "white",
       }}
     >
       <Box
@@ -95,7 +97,8 @@ const Navbar: React.FC = () => {
           width: "100%",
           height: "100%",
           borderRadius: location.pathname === "/" ? "0px 0px 24px 0px" : "",
-          backgroundColor: "purple",
+          // backgroundColor: "purple",
+          backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
         }}
         onClick={handleProfileClick}
       >
@@ -106,7 +109,10 @@ const Navbar: React.FC = () => {
             sx={{
               width: 70,
               height: 70,
-              border: "5px solid white",
+              // border: "5px solid white",
+              border: isDarkMode
+                ? "5px solid rgb(128, 0, 128, .2)"
+                : "5px solid white",
             }}
           />
         </Tooltip>
@@ -131,42 +137,49 @@ const Navbar: React.FC = () => {
       </Box>
       <Box sx={{ display: "flex" }}>
         <Button
-          className={location.pathname === "/" ? "active" : ""}
+          // className={location.pathname === "/" ? "active" : ""}
+          className={
+            location.pathname === "/"
+              ? isDarkMode
+                ? "dark-mode-active"
+                : "active"
+              : ""
+          }
           onClick={() => handleNavigate("/")}
           sx={{
             width: "100%",
             height: 100,
             textAlign: "left",
             color: "white",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            transition: "background-color linear 0.2s",
             borderRadius:
               location.pathname === "/projects" ? "0px 0px 24px 0px" : "",
-            transition: "background-color linear 0.2s",
-            ":hover": {
-              backgroundColor:
-                location.pathname === "/projects" ? "purple" : "white",
-              color: location.pathname === "/projects" ? "white" : "purple",
-            },
           }}
           disableRipple
         >
           Home
         </Button>
         <Button
-          className={location.pathname === "/projects" ? "active" : ""}
+          // className={location.pathname === "/projects" ? "active" : ""}
+          className={
+            location.pathname === "/projects"
+              ? isDarkMode
+                ? "dark-mode-active"
+                : "active"
+              : ""
+          }
           onClick={() => handleNavigate("/projects")}
           sx={{
             width: "100%",
             height: 100,
-            textAlign: "left",
+            textAlign: "center",
             color: "white",
-            backgroundColor: "purple",
+            // backgroundColor: "purple",
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             transition: "background-color linear 0.2s",
             borderRadius: location.pathname === "/" ? "0px 0px 0px 24px" : "",
-            ":hover": {
-              backgroundColor: location.pathname === "/" ? "purple" : "white",
-              color: location.pathname === "/" ? "white" : "purple",
-            },
           }}
           disableRipple
         >

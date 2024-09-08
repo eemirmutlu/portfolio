@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import LoaderScreen from "./LoaderScreen";
 import ErrorPage from "./ErrorPage";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 interface IDocumentViewer {
   title: string;
@@ -42,6 +43,7 @@ const DocumentViewer = ({
   const [selectedDocumentIndex, setSelectedDocumentIndex] = useState(0);
   const [parsedUrl, setParsedUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { isDarkMode } = useThemeContext();
 
   useEffect(() => {
     const loadDocument = async () => {
@@ -97,7 +99,8 @@ const DocumentViewer = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          color: "purple",
+          color: isDarkMode ? "white" : "purple",
+          backgroundColor: isDarkMode ? "#1E1B29" : "",
         }}
       >
         <Typography variant="h6">
@@ -115,7 +118,7 @@ const DocumentViewer = ({
         >
           {isCanDownload || isCanDownload === undefined ? (
             <IconButton
-              sx={{ color: "purple" }}
+              sx={{ color: isDarkMode ? "white" : "purple" }}
               onClick={() => {
                 const documentUrl =
                   additionalDocuments[selectedDocumentIndex - 1]?.url ?? url;
@@ -126,7 +129,7 @@ const DocumentViewer = ({
             </IconButton>
           ) : null}
           <IconButton
-            sx={{ color: "purple" }}
+            sx={{ color: isDarkMode ? "white" : "purple" }}
             aria-label="close"
             onClick={handleClose}
           >
@@ -139,6 +142,9 @@ const DocumentViewer = ({
           value={selectedDocumentIndex}
           onChange={(_event, newIndex) => setSelectedDocumentIndex(newIndex)}
           variant="scrollable"
+          sx={{
+            backgroundColor: isDarkMode ? "#1E1B29" : "",
+          }}
         >
           {[{ title, url, type }, ...additionalDocuments].map((doc, index) => (
             <Tab key={index} label={doc.title} />
@@ -148,7 +154,9 @@ const DocumentViewer = ({
       {isLoading ? (
         <LoaderScreen />
       ) : parsedUrl ? (
-        <DialogContent sx={{ height: "80vh" }}>
+        <DialogContent
+          sx={{ height: "80vh", backgroundColor: isDarkMode ? "#1E1B29" : "" }}
+        >
           <iframe
             title="Document Viewer"
             src={parsedUrl}

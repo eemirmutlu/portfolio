@@ -5,6 +5,11 @@ button.active {
   color: purple;
 }
 
+button.dark-mode-active {
+  background-color: #1E1B29;
+  color: white;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;

@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography, Container, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Container,
+  useMediaQuery,
+  IconButton,
+} from "@mui/material";
 import { useThemeContext } from "../contexts/ThemeContext";
 import DocumentViewer from "../components/DocumentViewer";
 import HomeSkeleton from "../components/HomeSkeleton"; // Import the skeleton
 import { Helmet } from "react-helmet";
 import SkillCard from "../components/SkillCard";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 const documentData = {
   title: "CV",
@@ -47,7 +55,7 @@ const skills = [
 ];
 
 const Home: React.FC = () => {
-  const { isDarkMode } = useThemeContext();
+  const { isDarkMode, toggleDarkMode } = useThemeContext();
   const [openViewer, setOpenViewer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const isSmallScreen = useMediaQuery("(max-width:500px)");
@@ -102,14 +110,28 @@ const Home: React.FC = () => {
   return (
     <Container
       sx={{
-        bgcolor: isDarkMode ? "rgb(0, 0, 0, .0)" : "white",
-        color: isDarkMode ? "#ffffff" : "#000000",
+        bgcolor: isDarkMode ? "#1E1B29" : "#ffffff",
+        color: isDarkMode ? "#E0E0E0" : "#000000",
         padding: 4,
+        minHeight: "100vh",
       }}
     >
       <Helmet>
         <title>{isLoading ? "Loading..." : "Home • Emir Mutlu"}</title>
       </Helmet>
+
+      {/* Dark Mode Toggle */}
+      <IconButton
+        onClick={toggleDarkMode}
+        sx={{ position: "absolute", top: isSmallScreen ? 100 : 16, right: 16 }}
+      >
+        {isDarkMode ? (
+          <LightModeIcon sx={{ color: "#fff" }} />
+        ) : (
+          <DarkModeIcon sx={{ color: "purple" }} />
+        )}
+      </IconButton>
+
       {isLoading ? (
         <HomeSkeleton />
       ) : (
@@ -123,7 +145,7 @@ const Home: React.FC = () => {
               whiteSpace: "nowrap",
               borderRight: "3px solid",
               animation: "blink 0.75s step-end infinite",
-              color: "purple",
+              color: isDarkMode ? "#4C4A7E" : "#6A61A1", // Dark navy or purple
               fontSize: isSmallScreen ? "20px" : "50px",
             }}
           >
@@ -135,20 +157,26 @@ const Home: React.FC = () => {
             sx={{ mb: 2, fontSize: isSmallScreen ? "15px" : "30px" }}
           >
             Hello, I'm Emir. Let me introduce myself. I was born in{" "}
-            <b>Turkey</b> in 2003, and I am currently interested in{" "}
-            <b>software development</b>. My hobbies include watching movies and
-            following sports like football and basketball, as well as
-            participating in them. Right now, I'm working as a front-end
-            developer at a software company in the city where I live. Thanks to
-            my team, I'm aiming to improve myself and eventually take on roles
-            in larger companies and bigger projects. At the same time, I’m
-            continuing my education at Uludağ University, studying Econometrics.
-            In addition to the skills I've gained from my degree, I’ve taught
-            myself JavaScript and started focusing on front-end development.
-            Writing front-end code gives me a lot of joy, and I want to dedicate
-            myself to this field as I continue to grow and develop
-            professionally. I am proficient in both <b>English</b> and{" "}
-            <b>Turkish</b>, and I can speak both languages fluently.
+            <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>Turkey</b>{" "}
+            in 2003, and I am currently interested in{" "}
+            <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
+              software development
+            </b>
+            . My hobbies include watching movies and following sports like
+            football and basketball, as well as participating in them. Right
+            now, I'm working as a front-end developer at a software company in
+            the city where I live. Thanks to my team, I'm aiming to improve
+            myself and eventually take on roles in larger companies and bigger
+            projects. At the same time, I’m continuing my education at Uludağ
+            University, studying Econometrics. In addition to the skills I've
+            gained from my degree, I’ve taught myself JavaScript and started
+            focusing on front-end development. Writing front-end code gives me a
+            lot of joy, and I want to dedicate myself to this field as I
+            continue to grow and develop professionally. I am proficient in both{" "}
+            <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>English</b>{" "}
+            and{" "}
+            <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>Turkish</b>
+            , and I can speak both languages fluently.
           </Typography>
 
           <Button
@@ -156,7 +184,7 @@ const Home: React.FC = () => {
             onClick={handleOpenViewer}
             sx={{
               mb: 4,
-              backgroundColor: "purple",
+              backgroundColor: isDarkMode ? "#4C4A7E" : "#6A61A1", // Navy blue or purple
               borderRadius: "30px",
               color: "#ffffff",
               fontWeight: "bold",
@@ -165,12 +193,11 @@ const Home: React.FC = () => {
               boxShadow: "0 6px 12px rgba(0, 0, 0, 0.2)",
               transition: "all 0.3s ease",
               ":hover": {
-                backgroundColor: "purple",
                 boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)",
                 transform: "scale(1.05)",
               },
               ":active": {
-                backgroundColor: "purple",
+                backgroundColor: "#6A61A1",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
               },
             }}
@@ -186,34 +213,26 @@ const Home: React.FC = () => {
             fullScreen={!isSmallScreen ? true : false}
             isCanDownload={true}
           />
+
+          {/* Skills Section */}
           <Container
             sx={{
-              bgcolor: isDarkMode ? "rgb(0, 0, 0, .0)" : "white",
-              color: isDarkMode ? "#ffffff" : "#000000",
+              bgcolor: isDarkMode ? "#1E1B29" : "#ffffff",
               padding: 4,
             }}
           >
-            <Helmet>
-              <title>{isLoading ? "Loading..." : "Home • Emir Mutlu"}</title>
-            </Helmet>
-            {isLoading ? (
-              <HomeSkeleton />
-            ) : (
-              <>
-                <Typography variant="h4" sx={{ marginBottom: 4 }}>
-                  My Skills
-                </Typography>
+            <Typography variant="h4" sx={{ marginBottom: 4 }}>
+              My Skills
+            </Typography>
 
-                {skills.map((skill, index) => (
-                  <SkillCard
-                    key={index}
-                    name={skill.name}
-                    level={skill.level}
-                    description={skill.description}
-                  />
-                ))}
-              </>
-            )}
+            {skills.map((skill, index) => (
+              <SkillCard
+                key={index}
+                name={skill.name}
+                level={skill.level}
+                description={skill.description}
+              />
+            ))}
           </Container>
         </>
       )}

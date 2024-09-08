@@ -1,5 +1,10 @@
-// src/contexts/ThemeContext.tsx
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 interface ThemeContextType {
@@ -12,17 +17,30 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProviderComponent: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  // Check localStorage for the theme preference, default to false (light mode)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    () => localStorage.getItem("isDarkMode") === "true"
+  );
 
   const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("isDarkMode", newMode.toString()); // Save to localStorage
+      return newMode;
+    });
   };
 
+  // Apply the theme mode based on the state
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? "dark" : "light",
     },
   });
+
+  useEffect(() => {
+    // Update localStorage when the component mounts if not present
+    localStorage.setItem("isDarkMode", isDarkMode.toString());
+  }, [isDarkMode]);
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>

@@ -1,16 +1,18 @@
 import React from "react";
 import { Box, useMediaQuery, Skeleton } from "@mui/material";
 import { Triangle } from "react-loader-spinner";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 const SidebarSkeleton: React.FC = () => {
   const isSmallScreen = useMediaQuery("(max-width:1024px)");
+  const { isDarkMode } = useThemeContext();
 
   return (
     <Box
       sx={{
         width: 320,
         height: "100vh",
-        backgroundColor: "unset",
+        backgroundColor: isDarkMode ? "#1E1B29" : "unset",
         position: "fixed",
         top: 0,
         left: 0,
@@ -33,7 +35,7 @@ const SidebarSkeleton: React.FC = () => {
           width: 320,
           height: "100vh",
           padding: 0,
-          backgroundColor: "white",
+          backgroundColor: isDarkMode ? "#1E1B29" : "white",
           position: "fixed",
           top: 0,
           left: 0,
@@ -66,9 +68,9 @@ const SidebarSkeleton: React.FC = () => {
           }}
         >
           <Skeleton variant="text" width="100%" height={80} />
-          <Box sx={{mt: 5}}>
-            <Skeleton variant="text" width="100%" height={96} sx={{  }} />
-            <Skeleton variant="text" width="100%" height={96} sx={{  }} />
+          <Box sx={{ mt: 5 }}>
+            <Skeleton variant="text" width="100%" height={96} sx={{}} />
+            <Skeleton variant="text" width="100%" height={96} sx={{}} />
           </Box>
         </Box>
         <Box

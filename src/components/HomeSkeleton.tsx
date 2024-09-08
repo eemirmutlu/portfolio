@@ -3,11 +3,11 @@ import { Box, Card, CardContent, Skeleton, useMediaQuery } from "@mui/material";
 
 const HomeSkeleton: React.FC = () => {
   const isSmallScreen = useMediaQuery("(min-width: 450px)");
-  const isMidScreen = useMediaQuery("(min-width: 850px)");
+  const isMidScreen = useMediaQuery("(min-width: 1025px)");
 
   const customWidth = () => {
     if (isMidScreen) {
-      return 900;
+      return 1000;
     } else if (isSmallScreen) {
       return 600;
     } else {
@@ -20,7 +20,6 @@ const HomeSkeleton: React.FC = () => {
       sx={{
         width: customWidth(),
         marginBottom: 2,
-        padding: 2,
       }}
     >
       <CardContent>
@@ -57,31 +56,26 @@ const HomeSkeleton: React.FC = () => {
         // minheight: "100vh",
       }}
     >
+      <Skeleton variant="text" width={"100%"} height={50} animation={"wave"} />
       <Skeleton
         variant="text"
-        width={customWidth()}
-        height={50}
-        animation={"wave"}
-      />
-      <Skeleton
-        variant="text"
-        width={customWidth()}
+        width={"100%"}
         height={40}
         sx={{ marginY: 2 }}
         animation={"wave"}
       />
       <Skeleton
         variant="rectangular"
-        width={customWidth()}
-        height={300}
+        width={"100%"}
+        height={isSmallScreen ? 400 : 300}
         sx={{ borderRadius: 1 }}
         animation={"wave"}
       />
       <Skeleton
         variant="rectangular"
-        width={isSmallScreen ? 600 : 100}
+        width={isSmallScreen ? 100 : 100}
         height={50}
-        sx={{ marginY: 2, borderRadius: 1 }}
+        sx={{ marginY: 2, borderRadius: 9, alignSelf: "flex-start" }}
         animation={"wave"}
       />
       <Box
@@ -97,13 +91,13 @@ const HomeSkeleton: React.FC = () => {
       >
         <Skeleton
           variant="text"
-          width={customWidth()}
-          height={50}
+          width={isSmallScreen ? 200 : 150}
+          height={80}
           animation={"wave"}
-          sx={{ marginBottom: 4 }}
+          sx={{ marginBottom: 0, alignSelf: "flex-start" }}
         />
 
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 6 }).map((_, index) => (
           <React.Fragment key={index}>{renderSkeletonCard()}</React.Fragment>
         ))}
       </Box>

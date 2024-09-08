@@ -43,16 +43,6 @@ const DocumentViewer = ({
   const [parsedUrl, setParsedUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Sound effects
-  const openSound = new Audio("/open-sound.mp3");
-  const closeSound = new Audio("/close-sound.mp3");
-
-  useEffect(() => {
-    if (open) {
-      openSound.play();
-    }
-  }, [open]);
-
   useEffect(() => {
     const loadDocument = async () => {
       setIsLoading(true);
@@ -92,7 +82,6 @@ const DocumentViewer = ({
   };
 
   const handleClose = () => {
-    closeSound.play(); // Play sound when closing dialog
     onClose();
   };
 
@@ -108,6 +97,7 @@ const DocumentViewer = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          color: "purple",
         }}
       >
         <Typography variant="h6">
@@ -125,6 +115,7 @@ const DocumentViewer = ({
         >
           {isCanDownload || isCanDownload === undefined ? (
             <IconButton
+              sx={{ color: "purple" }}
               onClick={() => {
                 const documentUrl =
                   additionalDocuments[selectedDocumentIndex - 1]?.url ?? url;
@@ -134,7 +125,11 @@ const DocumentViewer = ({
               <FileDownloadOutlinedIcon />
             </IconButton>
           ) : null}
-          <IconButton aria-label="close" onClick={handleClose}>
+          <IconButton
+            sx={{ color: "purple" }}
+            aria-label="close"
+            onClick={handleClose}
+          >
             <CloseIcon />
           </IconButton>
         </Stack>

@@ -8,7 +8,7 @@ import {
   faDiscord,
   faInstagram,
   faLinkedin,
-} from "@fortawesome/free-brands-svg-icons"; // Import the social media icons
+} from "@fortawesome/free-brands-svg-icons";
 import SidebarSkeleton from "./SidebarSkeleton";
 
 interface User {
@@ -17,7 +17,7 @@ interface User {
   bio: string;
 }
 
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; // Access the token
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 const Sidebar: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -36,7 +36,6 @@ const Sidebar: React.FC = () => {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        // Simulate delay
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const response = await fetch(
@@ -83,7 +82,7 @@ const Sidebar: React.FC = () => {
       <Box
         sx={{
           width: isSmallScreen ? 240 : 320,
-          height: "100vh", // Set background color to purple
+          height: "100vh",
           padding: 0,
           backgroundColor: "white",
           position: "fixed",

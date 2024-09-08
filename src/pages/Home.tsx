@@ -47,7 +47,7 @@ const skills = [
 ];
 
 const Home: React.FC = () => {
-  const { isDarkMode } = useThemeContext(); // Access theme context
+  const { isDarkMode } = useThemeContext();
   const [openViewer, setOpenViewer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const isSmallScreen = useMediaQuery("(max-width:500px)");
@@ -56,19 +56,21 @@ const Home: React.FC = () => {
   const [displayText, setDisplayText] = useState("");
   const [speed] = useState(200);
 
-  const titleText = "Hello Welcome to my Portfolio";
+  const staticText = "H";
+  const dynamicText = "ello Welcome to my Portfolio";
 
   useEffect(() => {
     const handleType = () => {
       setDisplayText(
-        isDeleting
-          ? titleText.substring(0, titleIndex - 1)
-          : titleText.substring(0, titleIndex + 1)
+        staticText +
+          (isDeleting
+            ? dynamicText.substring(0, titleIndex - 1)
+            : dynamicText.substring(0, titleIndex + 1))
       );
       setTitleIndex(isDeleting ? titleIndex - 1 : titleIndex + 1);
 
-      if (!isDeleting && titleIndex === titleText.length) {
-        setTimeout(() => setIsDeleting(true), 1000); // Pause before deleting
+      if (!isDeleting && titleIndex === dynamicText.length) {
+        setTimeout(() => setIsDeleting(true), 1000);
       } else if (isDeleting && titleIndex === 0) {
         setIsDeleting(false);
       }
@@ -80,11 +82,10 @@ const Home: React.FC = () => {
   }, [titleIndex, isDeleting, speed]);
 
   useEffect(() => {
-    // Simulate loading
     const loadDocument = () => {
       setTimeout(() => {
-        setIsLoading(false); // Set loading to false after simulating load
-      }, 1000); // Adjust time as needed
+        setIsLoading(false);
+      }, 1000);
     };
 
     loadDocument();
@@ -110,7 +111,7 @@ const Home: React.FC = () => {
         <title>{isLoading ? "Loading..." : "Home • Emir Mutlu"}</title>
       </Helmet>
       {isLoading ? (
-        <HomeSkeleton /> // Display skeleton while loading
+        <HomeSkeleton />
       ) : (
         <>
           <Typography
@@ -156,10 +157,21 @@ const Home: React.FC = () => {
             sx={{
               mb: 4,
               backgroundColor: "purple",
+              borderRadius: "30px",
+              color: "#ffffff",
+              fontWeight: "bold",
+              padding: "12px 24px",
+              textTransform: "none",
+              boxShadow: "0 6px 12px rgba(0, 0, 0, 0.2)",
+              transition: "all 0.3s ease",
               ":hover": {
-                border: "1px solid purple",
-                color: "purple",
-                backgroundColor: "rgb(0,0,0,0)",
+                backgroundColor: "purple",
+                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)",
+                transform: "scale(1.05)",
+              },
+              ":active": {
+                backgroundColor: "purple",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
               },
             }}
           >
@@ -185,14 +197,13 @@ const Home: React.FC = () => {
               <title>{isLoading ? "Loading..." : "Home • Emir Mutlu"}</title>
             </Helmet>
             {isLoading ? (
-              <HomeSkeleton /> // Display skeleton while loading
+              <HomeSkeleton />
             ) : (
               <>
                 <Typography variant="h4" sx={{ marginBottom: 4 }}>
                   My Skills
                 </Typography>
 
-                {/* Render Skill Cards */}
                 {skills.map((skill, index) => (
                   <SkillCard
                     key={index}

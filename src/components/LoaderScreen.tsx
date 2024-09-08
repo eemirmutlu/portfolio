@@ -6,9 +6,9 @@ const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
   const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const typingSpeed = 150; // Speed of typing effect
-  const deletingSpeed = 75; // Speed of deleting effect
-  const pauseDuration = 1000; // Pause duration between typing and deleting
+  const typingSpeed = 150;
+  const deletingSpeed = 75;
+  const pauseDuration = 1000;
 
   useEffect(() => {
     if (isDeleting) {

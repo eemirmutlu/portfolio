@@ -17,8 +17,7 @@ interface User {
   bio: string;
 }
 
-// const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; // Access the token
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 const Navbar: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -36,7 +35,6 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        // Simulate network delay
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const response = await fetch(
@@ -53,7 +51,7 @@ const Navbar: React.FC = () => {
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
-        setIsLoading(false); // Hide skeleton after fetching data
+        setIsLoading(false);
       }
     };
 

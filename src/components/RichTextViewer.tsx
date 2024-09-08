@@ -1,4 +1,3 @@
-// src/components/RichTextViewer.tsx
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
@@ -11,12 +10,12 @@ const RichTextViewer: React.FC<RichTextViewerProps> = () => {
   return (
     <Box
       sx={{
-        border: (theme) => `2px solid ${theme.palette.primary.main}`, // Purple border
-        borderRadius: "12px", // Rounded corners
-        boxShadow: 3, // Add some shadow
-        backgroundColor: (theme) => theme.palette.background.paper, // Background color based on theme
-        padding: 2, // Padding inside the container
-        overflow: "hidden", // Hide overflow to keep the design neat
+        border: (theme) => `2px solid ${theme.palette.primary.main}`,
+        borderRadius: "12px",
+        boxShadow: 3,
+        backgroundColor: (theme) => theme.palette.background.paper,
+        padding: 2,
+        overflow: "hidden",
       }}
     >
       <Typography variant="h6" sx={{ mb: 2, color: "primary.main" }}>
@@ -26,18 +25,20 @@ const RichTextViewer: React.FC<RichTextViewerProps> = () => {
         component="div"
         sx={{
           "& .ql-editor": {
-            fontFamily: "Roboto, sans-serif", // Font for the editor
-            fontSize: "16px", // Font size
-            color: (theme) => theme.palette.text.primary, // Text color based on theme
-            lineHeight: "1.6", // Line height for better readability
+            fontFamily: "Roboto, sans-serif",
+            fontSize: "16px",
+            color: (theme) => theme.palette.text.primary,
+            lineHeight: "1.6",
           },
           "& .ql-toolbar": {
-            display: "none", // Hide the toolbar
+            display: "none",
           },
           minHeight: "300px",
           overflow: "auto",
         }}
-      >asdasda</Box>
+      >
+        asdasda
+      </Box>
     </Box>
   );
 };

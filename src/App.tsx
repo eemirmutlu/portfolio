@@ -11,7 +11,6 @@ import Footer from "./components/Footer";
 import { Helmet } from "react-helmet";
 
 const App: React.FC = () => {
-  // Determine if the screen width is less than 1024px
   const isSmallScreen = useMediaQuery("(max-width:1024px)");
 
   const pageTitle = location.pathname === "/projects" ? "Projects" : "Error";

@@ -14,10 +14,10 @@ import { Triangle } from "react-loader-spinner";
 interface ProjectViewerProps {
   open: boolean;
   onClose: () => void;
-  fileUrl: string; // URL to the file content on GitHub
+  fileUrl: string;
   repoName: string;
-  repoUrl: string; // GitHub repository URL
-  isLoading: boolean; // Loading state for spinner
+  repoUrl: string;
+  isLoading: boolean;
 }
 
 const ProjectViewer: React.FC<ProjectViewerProps> = ({
@@ -42,7 +42,6 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
           aria-label="close"
           onClick={onClose}
           sx={{ color: "purple" }}
-          disableRipple
         >
           <CloseIcon />
         </IconButton>

@@ -19,7 +19,7 @@ const Loader: React.FC = () => {
           height: 0,
           borderLeft: "30px solid transparent",
           borderRight: "30px solid transparent",
-          borderBottom: "60px solid #007bff", // You can choose any color for the triangle
+          borderBottom: "60px solid #007bff",
           animation: "rotate 1s linear infinite",
         }}
       />

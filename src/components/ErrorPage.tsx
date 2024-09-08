@@ -1,16 +1,16 @@
 // src/components/ErrorPage.tsx
 
 import React from "react";
-import { Box, Typography, Button, useMediaQuery } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, useMediaQuery } from "@mui/material";
+// import { useNavigate } from "react-router-dom";
 
 const ErrorPage: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const isSmallScreen = useMediaQuery("(media-screen:500px)");
 
-  const handleGoBack = () => {
-    navigate(-1); // Navigate back to the previous page
-  };
+  // const handleGoBack = () => {
+  //   navigate(-1);
+  // };
 
   return (
     <Box
@@ -35,7 +35,7 @@ const ErrorPage: React.FC = () => {
       <Typography fontFamily={"monospace"} variant="body1" sx={{ mb: 4 }}>
         We encountered an error while fetching the data. Please try again later.
       </Typography>
-      <Button
+      {/* <Button
         variant="text"
         color="inherit"
         disableFocusRipple
@@ -44,7 +44,7 @@ const ErrorPage: React.FC = () => {
         onClick={handleGoBack}
       >
         {`<- ${'GO BACK'}`}
-      </Button>
+      </Button> */}
     </Box>
   );
 };

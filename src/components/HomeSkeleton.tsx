@@ -11,7 +11,7 @@ const HomeSkeleton: React.FC = () => {
     } else if (isSmallScreen) {
       return 600;
     } else {
-      return 300; // Default value for smaller screens
+      return 300;
     }
   };
 
@@ -24,9 +24,7 @@ const HomeSkeleton: React.FC = () => {
       }}
     >
       <CardContent>
-        {/* Simulating the skill card layout */}
         <Box sx={{ display: "flex", alignItems: "center", marginBottom: 1 }}>
-          {/* Placeholder for the icon */}
           <Skeleton
             variant="circular"
             width={24}
@@ -34,10 +32,8 @@ const HomeSkeleton: React.FC = () => {
             sx={{ marginRight: 1 }}
             animation="wave"
           />
-          {/* Placeholder for the card title */}
           <Skeleton variant="text" width={150} height={30} animation="wave" />
         </Box>
-        {/* Placeholder for the progress bar */}
         <Skeleton
           variant="rectangular"
           width="100%"
@@ -45,7 +41,6 @@ const HomeSkeleton: React.FC = () => {
           sx={{ borderRadius: 5, marginY: 1 }}
           animation="wave"
         />
-        {/* Placeholder for the description */}
         <Skeleton variant="text" width="50%" height={20} animation="wave" />
       </CardContent>
     </Card>
@@ -64,7 +59,7 @@ const HomeSkeleton: React.FC = () => {
     >
       <Skeleton
         variant="text"
-        width={customWidth()} // Correct invocation
+        width={customWidth()}
         height={50}
         animation={"wave"}
       />
@@ -100,7 +95,6 @@ const HomeSkeleton: React.FC = () => {
           paddingTop: 4,
         }}
       >
-        {/* Skeleton for the main header */}
         <Skeleton
           variant="text"
           width={customWidth()}
@@ -109,7 +103,6 @@ const HomeSkeleton: React.FC = () => {
           sx={{ marginBottom: 4 }}
         />
 
-        {/* Rendering multiple skeleton cards */}
         {Array.from({ length: 4 }).map((_, index) => (
           <React.Fragment key={index}>{renderSkeletonCard()}</React.Fragment>
         ))}

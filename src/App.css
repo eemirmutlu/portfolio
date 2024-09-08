@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap");
 
 button.active {
-  background-color: rgb(255, 255, 255, .8); /* Highlight for active button */
+  background-color: rgb(255, 255, 255, 0.8);
   color: purple;
 }
-/* App.css */
 
 body {
   font-family: "Roboto", sans-serif;
@@ -55,4 +54,22 @@ h3 {
 b {
   text-decoration: underline;
   color: purple;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e0b2ff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7a4c99;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: purple;
 }

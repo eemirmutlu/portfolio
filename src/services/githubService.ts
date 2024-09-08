@@ -1,9 +1,8 @@
-// src/services/githubService.ts
 import axios from "axios";
 
 const GITHUB_API_URL = "https://api.github.com/users/eemirmutlu/repos";
 
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; // Access the token
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 export const fetchRepositories = async () => {
   try {
@@ -31,11 +30,11 @@ export const fetchFileContent = async (
       `${GITHUB_API_BASE_URL}/repos/${owner}/${repo}/contents/${path}`,
       {
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`, // GitHub token eklemeyi unutmayın
+          Authorization: `token ${GITHUB_TOKEN}`,
         },
       }
     );
-    const content = atob(response.data.content); // Base64 decode
+    const content = atob(response.data.content);
     return content;
   } catch (error) {
     console.error("Error fetching file content:", error);

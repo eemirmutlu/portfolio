@@ -34,7 +34,6 @@ const Projects: React.FC = () => {
   useEffect(() => {
     const loadRepositories = async () => {
       try {
-        // Simulate a delay
         setTimeout(async () => {
           try {
             const repos = await fetchRepositories();
@@ -45,7 +44,7 @@ const Projects: React.FC = () => {
           } finally {
             setIsLoading(false);
           }
-        }, 1000); // 1000ms delay
+        }, 1000);
       } catch (error) {
         console.error("Error fetching repositories:", error);
         setHasError(true);
@@ -82,9 +81,9 @@ const Projects: React.FC = () => {
             variant="text"
             sx={{
               fontSize: "2rem",
-              width: "50%", // Daha dar bir görünüm
+              width: "50%",
               margin: "0 auto",
-              height: "2.5rem", // Daha kalın
+              height: "2.5rem",
               display: "inline-block",
             }}
           />

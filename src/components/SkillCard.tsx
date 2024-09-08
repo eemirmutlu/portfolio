@@ -24,19 +24,17 @@ const SkillCard: React.FC<{
   return (
     <ButtonBase
       sx={{ width: "100%", textAlign: "left" }}
-      disableRipple // Disable ripple effect here
+      disableRipple
     >
       <Card
         sx={{
           marginBottom: 2,
           bgcolor: open ? "#f4f4f4" : "white",
-          width: "100%", // Ensure it takes full width
+          width: "100%",
         }}
       >
         <CardContent>
-          {/* Flex container for icon and title */}
           <Box sx={{ display: "flex", alignItems: "center", }}>
-            {/* Conditional rendering of img src based on the open state */}
             <img
               src={
                 open
@@ -45,12 +43,11 @@ const SkillCard: React.FC<{
               }
               alt="toggle icon"
               style={{ marginRight: 8 }}
-              onClick={toggleDescription} // Add margin to give some space between icon and text
+              onClick={toggleDescription}
             />
             <Typography variant="h6">{name}</Typography>
           </Box>
 
-          {/* Skill progress bar */}
           <LinearProgress
             variant="determinate"
             value={level}
@@ -61,7 +58,6 @@ const SkillCard: React.FC<{
             Proficiency: {level}%
           </Typography>
 
-          {/* Collapsible description */}
           <Collapse in={open}>
             <Box sx={{ marginTop: 1 }}>
               <Typography variant="body2">{description}</Typography>

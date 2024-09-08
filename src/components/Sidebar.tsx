@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
   const { isDarkMode } = useThemeContext();
 
-  const isSmallScreen = useMediaQuery("(max-width: 1440px)");
+  const isSmallScreen = useMediaQuery("(max-width: 1500px)");
 
   // const clickSound = new Audio("../public/click2.mp3");
 

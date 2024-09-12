@@ -192,6 +192,7 @@ const Sidebar: React.FC = () => {
             justifyContent: "space-evenly",
             backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             padding: "50px",
+            borderRadius: location.pathname === "/projects" ? "0px 12px 0px 0px" : "",
           }}
         >
           <Tooltip title="Github">

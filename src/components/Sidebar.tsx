@@ -169,7 +169,7 @@ const Sidebar: React.FC = () => {
                 : "active"
               : ""
           }
-          onClick={() => handleNavigate("/projects")}
+          onClick={() => handleNavigate("/projects")} 
           sx={{
             width: "100%",
             height: "96px",

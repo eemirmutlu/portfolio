@@ -37,6 +37,7 @@ const Projects: React.FC = () => {
   const theme = useTheme();
   const { isDarkMode, toggleDarkMode } = useThemeContext();
   const isSmallScreen = useMediaQuery("(max-width:500px)");
+  const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
     const loadRepositories = async () => {
@@ -62,8 +63,27 @@ const Projects: React.FC = () => {
     loadRepositories();
   }, []);
 
+  useEffect(() => {
+    if (selectedRepo) {
+      const iframeUrl = `https://eemirmutlu.github.io/${selectedRepo.name}`;
+      checkIframeUrl(iframeUrl);
+    }
+  }, [selectedRepo]);
+
   const handleOpenViewer = (repo: Repository) => {
     setSelectedRepo(repo);
+  };
+  
+
+  const checkIframeUrl = async (url: string) => {
+    try {
+      const response = await fetch(url, { method: "GET" });
+      setIsNotFound(response.status === 404);
+      console.log(response);
+    } catch (error) {
+      console.error("Error checking iframe URL:", error);
+      setIsNotFound(false);
+    }
   };
 
   const handleCloseViewer = () => {
@@ -282,6 +302,8 @@ const Projects: React.FC = () => {
           repoName={selectedRepo.name}
           repoUrl={selectedRepo.html_url}
           isLoading={isLoading}
+          iframeUrl={`https://eemirmutlu.github.io/${selectedRepo.name}`}
+          isNotFound={isNotFound}
         />
       )}
     </Container>

@@ -19,19 +19,24 @@ interface ProjectViewerProps {
   repoName: string;
   repoUrl: string;
   isLoading: boolean;
+  iframeUrl: string;
+  isNotFound: boolean;
 }
 
 const ProjectViewer: React.FC<ProjectViewerProps> = ({
   open,
   onClose,
   repoName,
+  iframeUrl,
   repoUrl,
   isLoading,
+  isNotFound,
 }) => {
   const isSmallScreen = useMediaQuery("(min-width:500px)");
   const { isDarkMode } = useThemeContext();
+
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth sx={{}}>
+    <Dialog open={open} onClose={onClose} maxWidth="xl" fullWidth>
       <DialogTitle
         sx={{
           display: "flex",
@@ -40,7 +45,9 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
           backgroundColor: isDarkMode ? "#1E1B29" : "",
         }}
       >
-        <Typography color={isDarkMode ? 'white' : 'purple'} variant="h6">{repoName}</Typography>
+        <Typography color={isDarkMode ? "white" : "purple"} variant="h6">
+          {repoName}
+        </Typography>
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -52,6 +59,8 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
       <DialogContent
         sx={{
           backgroundColor: isDarkMode ? "#1E1B29" : "",
+          height: "80vh",
+          padding: 0,
         }}
         dividers
       >
@@ -71,10 +80,34 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
               width="100"
               color="purple"
               ariaLabel="triangle-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
             />
           </Box>
+        ) : !isNotFound ? (
+          <div
+            style={{
+              position: "relative",
+              paddingBottom: "56.25%",
+              height: 0,
+              overflow: "hidden",
+              maxWidth: "100%",
+            }}
+          >
+            <iframe
+              src={iframeUrl}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: "none",
+                borderRadius: "16px",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s ease",
+              }}
+              allow="geolocation; fullscreen"
+            />
+          </div>
         ) : (
           <div
             style={{

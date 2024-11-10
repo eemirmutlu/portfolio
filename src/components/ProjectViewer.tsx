@@ -59,7 +59,7 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
       <DialogContent
         sx={{
           backgroundColor: isDarkMode ? "#1E1B29" : "",
-          height: "80vh",
+          minHeight: "80vh",
           padding: 0,
         }}
         dividers

@@ -87,7 +87,7 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
             style={{
               position: "relative",
               paddingBottom: "56.25%",
-              height: isSmallScreen ? "100vh" : "100vh",
+              height: isSmallScreen ? "80vh" : "80vh",
               overflow: "hidden",
               maxWidth: "100%",
             }}
@@ -100,8 +100,6 @@ const ProjectViewer: React.FC<ProjectViewerProps> = ({
                 left: 0,
                 width: "100%",
                 height: isSmallScreen ? "100%" : "100%",
-                border: "none",
-                borderRadius: isSmallScreen ? "0" : "16px",
                 boxShadow: isSmallScreen
                   ? "none"
                   : "0 4px 20px rgba(0, 0, 0, 0.1)",

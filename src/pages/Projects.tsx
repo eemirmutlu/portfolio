@@ -73,7 +73,6 @@ const Projects: React.FC = () => {
   const handleOpenViewer = (repo: Repository) => {
     setSelectedRepo(repo);
   };
-  
 
   const checkIframeUrl = async (url: string) => {
     try {

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "../contexts/ThemeContext";
 import DocumentViewer from "../components/DocumentViewer";
-import HomeSkeleton from "../components/HomeSkeleton"; // Import the skeleton
+import HomeSkeleton from "../components/HomeSkeleton";
 import { Helmet } from "react-helmet";
 import SkillCard from "../components/SkillCard";
 import DarkModeIcon from "@mui/icons-material/DarkMode";

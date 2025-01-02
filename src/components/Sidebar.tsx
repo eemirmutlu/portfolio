@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
   useThemeContext();
   const location = useLocation();
   const { isDarkMode } = useThemeContext();
-  const { language, toggleLanguage } = useLanguageContext();
+  const { language } = useLanguageContext();
 
   const isSmallScreen = useMediaQuery("(max-width: 1550px)");
 

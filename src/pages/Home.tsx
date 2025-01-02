@@ -130,6 +130,57 @@ const Home: React.FC = () => {
             ? "Loading..."
             : "Home • Emir Mutlu"}
         </title>
+
+        <meta
+          name="description"
+          content={
+            openViewer
+              ? `${documentData.title} belgesinin detayları. Emir Mutlu'nun projeleri, yazılım geliştirme ve daha fazlası hakkında bilgi edinin.`
+              : "Emir Mutlu'nun kişisel web sitesi. Yazılım geliştirme, frontend, proje yönetimi ve daha fazlası hakkında bilgi edinin."
+          }
+        />
+
+        <meta
+          name="keywords"
+          content="Emir Mutlu, yazılım geliştirici, frontend geliştirici, React, yazılım mühendisliği, projeler, belgeleme, yazılım projeleri"
+        />
+
+        <meta
+          property="og:title"
+          content={openViewer ? documentData.title : "Home • Emir Mutlu"}
+        />
+        <meta
+          property="og:description"
+          content={
+            openViewer
+              ? `${documentData.title} belgesinin detayları. Daha fazla bilgi için tıklayın.`
+              : "Emir Mutlu'nun kişisel web sitesi. Yazılım projeleri, yazılım mühendisliği ve frontend hakkında bilgi edinin."
+          }
+        />
+        <meta property="og:image" content="/logo2.png" />
+        <meta
+          property="og:url"
+          content={
+            openViewer
+              ? `https://emirmutlu.me/viewer/${documentData.title}`
+              : "https://emirmutlu.me"
+          }
+        />
+
+        <meta
+          name="twitter:title"
+          content={openViewer ? documentData.title : "Home • Emir Mutlu"}
+        />
+        <meta
+          name="twitter:description"
+          content={
+            openViewer
+              ? `${documentData.title} belgesinin detayları. Daha fazla bilgi için tıklayın.`
+              : "Emir Mutlu'nun kişisel web sitesi. Yazılım projeleri, yazılım mühendisliği ve frontend hakkında bilgi edinin."
+          }
+        />
+        <meta name="twitter:image" content="/logo2.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       {isLoading ? (

@@ -103,6 +103,57 @@ const Projects: React.FC = () => {
             ? "Loading..."
             : "Projects • Emir Mutlu"}
         </title>
+
+        <meta
+          name="description"
+          content={
+            selectedRepo
+              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar ve kaynak kodları için tıklayın.`
+              : "Emir Mutlu'nun yazılım geliştirme projelerini keşfedin. React, frontend, ve yazılım mühendisliği konularında deneyimlerimi paylaşan projeler."
+          }
+        />
+
+        <meta
+          name="keywords"
+          content="Emir Mutlu, yazılım geliştirme, React projeleri, frontend geliştirme, yazılım mühendisliği, yazılım projeleri"
+        />
+
+        <meta
+          property="og:title"
+          content={selectedRepo ? selectedRepo.name : "Projects • Emir Mutlu"}
+        />
+        <meta
+          property="og:description"
+          content={
+            selectedRepo
+              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar için tıklayın.`
+              : "Emir Mutlu'nun yazılım geliştirme projeleri hakkında bilgi edinin."
+          }
+        />
+        <meta property="og:image" content="/logo2.png" />
+        <meta
+          property="og:url"
+          content={
+            selectedRepo
+              ? `https://emirmutlu.me/projects/${selectedRepo.id}`
+              : "https://emirmutlu.me/projects"
+          }
+        />
+
+        <meta
+          name="twitter:title"
+          content={selectedRepo ? selectedRepo.name : "Projects • Emir Mutlu"}
+        />
+        <meta
+          name="twitter:description"
+          content={
+            selectedRepo
+              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar için tıklayın.`
+              : "Emir Mutlu'nun yazılım geliştirme projeleri hakkında bilgi edinin."
+          }
+        />
+        <meta name="twitter:image" content="/logo2.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Box sx={{ textAlign: "center", mb: 4 }}>
         {isLoading ? (

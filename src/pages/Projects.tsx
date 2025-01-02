@@ -13,7 +13,9 @@ import {
   Avatar,
   Skeleton,
   IconButton,
-  useMediaQuery,
+  Stack,
+  MenuItem,
+  Popover,
 } from "@mui/material";
 import ProjectViewer from "../components/ProjectViewer";
 import ErrorPage from "../components/ErrorPage";
@@ -21,6 +23,8 @@ import { Helmet } from "react-helmet";
 import { useThemeContext } from "../contexts/ThemeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import { LanguageOutlined } from "@mui/icons-material";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 interface Repository {
   id: number;
@@ -36,8 +40,9 @@ const Projects: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const theme = useTheme();
   const { isDarkMode, toggleDarkMode } = useThemeContext();
-  const isSmallScreen = useMediaQuery("(max-width:500px)");
   const [isNotFound, setIsNotFound] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { language, toggleLanguage } = useLanguageContext();
 
   useEffect(() => {
     const loadRepositories = async () => {
@@ -92,6 +97,13 @@ const Projects: React.FC = () => {
   if (hasError) {
     return <ErrorPage />;
   }
+
+  const handleLanguageChange = (lang: string) => {
+    if (lang !== language) {
+      toggleLanguage();
+    }
+    setAnchorEl(null);
+  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -199,21 +211,15 @@ const Projects: React.FC = () => {
             </Box>
           </>
         ) : (
-          <>
-            <IconButton
-              onClick={toggleDarkMode}
-              sx={{
-                position: "absolute",
-                top: isSmallScreen ? 100 : 16,
-                right: 16,
-              }}
-            >
-              {isDarkMode ? (
-                <LightModeIcon sx={{ color: "#fff" }} />
-              ) : (
-                <DarkModeIcon sx={{ color: "purple" }} />
-              )}
-            </IconButton>
+          <Stack
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Box></Box>
             <Typography
               variant="h4"
               component="h1"
@@ -222,9 +228,36 @@ const Projects: React.FC = () => {
                 color: isDarkMode ? "white" : "purple",
               }}
             >
-              My Projects
+              {language === "tr" ? "Projelerim" : "My Projects"}
             </Typography>
-          </>
+            <Box>
+              <IconButton onClick={(event) => setAnchorEl(event.currentTarget)}>
+                <LanguageOutlined
+                  sx={{ color: isDarkMode ? "#fff" : "purple" }}
+                />
+              </IconButton>
+
+              <Popover
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+              >
+                <MenuItem onClick={() => handleLanguageChange("en")}>
+                  English
+                </MenuItem>
+                <MenuItem onClick={() => handleLanguageChange("tr")}>
+                  Türkçe
+                </MenuItem>
+              </Popover>
+              <IconButton onClick={toggleDarkMode}>
+                {isDarkMode ? (
+                  <LightModeIcon sx={{ color: "#fff" }} />
+                ) : (
+                  <DarkModeIcon sx={{ color: "purple" }} />
+                )}
+              </IconButton>
+            </Box>
+          </Stack>
         )}
       </Box>
       <Grid container spacing={4}>
@@ -332,12 +365,17 @@ const Projects: React.FC = () => {
                       </Box>
                       <Typography
                         variant="body2"
+                        fontWeight="400"
                         sx={{
                           mb: 2,
-                          color: isDarkMode ? "#ffffff" : "#000000",
+                          color: isDarkMode
+                            ? "rgb(255, 255, 255, .5)"
+                            : "rgb(0, 0, 0, .7)",
                         }}
                       >
-                        {repo.description || "No description available"}
+                        {repo.description || language === "tr"
+                          ? "Açıklama bulunmuyor."
+                          : "No description available."}
                       </Typography>
                       <Box>
                         <Chip

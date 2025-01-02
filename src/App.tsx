@@ -9,6 +9,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Helmet } from "react-helmet";
+import { LanguageProviderComponent } from "./contexts/LanguageContext";
 
 const App: React.FC = () => {
   const isSmallScreen = useMediaQuery("(max-width:1110px)");
@@ -16,52 +17,54 @@ const App: React.FC = () => {
   const pageTitle = location.pathname === "/projects" ? "Projects" : "Error";
 
   return (
-    <ThemeProviderComponent>
-      <Router>
-        <Helmet>
-          <title>{pageTitle}</title>
-        </Helmet>
-        <Box
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "dark" ? "#1E1B29" : "white",
-            borderRadius: "24px 0px 0px 0px",
-            margin: 0,
-            padding: 0,
-            left: 0,
-            position: "relative",
-          }}
-        >
+    <LanguageProviderComponent>
+      <ThemeProviderComponent>
+        <Router>
+          <Helmet>
+            <title>{pageTitle}</title>
+          </Helmet>
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: isSmallScreen ? "1fr" : "2fr 10fr",
+              backgroundColor: (theme) =>
+                theme.palette.mode === "dark" ? "#1E1B29" : "white",
+              borderRadius: "24px 0px 0px 0px",
+              margin: 0,
+              padding: 0,
+              left: 0,
+              position: "relative",
             }}
           >
-            {!isSmallScreen && (
-              <Box>
-                <Sidebar />
-              </Box>
-            )}
             <Box
-              component="main"
               sx={{
-                padding: 0,
-                margin: 0,
-                minHeight: "100vh",
+                display: "grid",
+                gridTemplateColumns: isSmallScreen ? "1fr" : "2fr 10fr",
               }}
             >
-              {isSmallScreen && <Navbar />}
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/projects" element={<Projects />} />
-              </Routes>
+              {!isSmallScreen && (
+                <Box>
+                  <Sidebar />
+                </Box>
+              )}
+              <Box
+                component="main"
+                sx={{
+                  padding: 0,
+                  margin: 0,
+                  minHeight: "100vh",
+                }}
+              >
+                {isSmallScreen && <Navbar />}
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/projects" element={<Projects />} />
+                </Routes>
+              </Box>
+              {isSmallScreen ? <Footer /> : ""}
             </Box>
-            {isSmallScreen ? <Footer /> : ""}
           </Box>
-        </Box>
-      </Router>
-    </ThemeProviderComponent>
+        </Router>
+      </ThemeProviderComponent>
+    </LanguageProviderComponent>
   );
 };
 

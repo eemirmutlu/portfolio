@@ -9,14 +9,16 @@ import {
   ButtonBase,
 } from "@mui/material";
 import { useThemeContext } from "../contexts/ThemeContext";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 const SkillCard: React.FC<{
   name: string;
   level: number;
   description: string;
 }> = ({ name, level, description }) => {
-  const { isDarkMode } = useThemeContext(); // Get dark mode status
+  const { isDarkMode } = useThemeContext();
   const [open, setOpen] = useState(false);
+  const { language } = useLanguageContext();
 
   const toggleDescription = () => {
     setOpen(!open);
@@ -72,7 +74,7 @@ const SkillCard: React.FC<{
             variant="body2"
             sx={{ color: isDarkMode ? "#bbbbbb" : "text.secondary" }}
           >
-            Proficiency: {level}%
+            {`${language === "tr" ? "Seviye" : "Proficiency"}: ${level}%`}
           </Typography>
 
           <Collapse in={open}>

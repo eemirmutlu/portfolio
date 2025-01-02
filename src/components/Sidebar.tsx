@@ -17,6 +17,7 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import SidebarSkeleton from "./SidebarSkeleton";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 interface User {
   login: string;
@@ -32,6 +33,7 @@ const Sidebar: React.FC = () => {
   useThemeContext();
   const location = useLocation();
   const { isDarkMode } = useThemeContext();
+  const { language, toggleLanguage } = useLanguageContext();
 
   const isSmallScreen = useMediaQuery("(max-width: 1550px)");
 
@@ -100,7 +102,7 @@ const Sidebar: React.FC = () => {
             alignItems: "center",
             cursor: "pointer",
             padding: "24px",
-            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
           }}
           onClick={handleProfileClick}
         >
@@ -132,7 +134,7 @@ const Sidebar: React.FC = () => {
           sx={{
             color: "white",
             borderRadius: location.pathname === "/" ? "0px 0px 12px 0px" : "",
-            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
+            backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             padding: "24px",
           }}
         >
@@ -159,7 +161,7 @@ const Sidebar: React.FC = () => {
           }}
           disableRipple
         >
-          Home
+          {language === "tr" ? "Ana Sayfa" : "Home"}
         </Button>
         <Button
           className={
@@ -169,7 +171,7 @@ const Sidebar: React.FC = () => {
                 : "active"
               : ""
           }
-          onClick={() => handleNavigate("/projects")} 
+          onClick={() => handleNavigate("/projects")}
           sx={{
             width: "100%",
             height: "96px",
@@ -181,7 +183,7 @@ const Sidebar: React.FC = () => {
           }}
           disableRipple
         >
-          Projects
+          {language === "tr" ? "Projeler" : "Projects"}
         </Button>
 
         <Box
@@ -192,7 +194,8 @@ const Sidebar: React.FC = () => {
             justifyContent: "space-evenly",
             backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             padding: "50px",
-            borderRadius: location.pathname === "/projects" ? "0px 12px 0px 0px" : "",
+            borderRadius:
+              location.pathname === "/projects" ? "0px 12px 0px 0px" : "",
           }}
         >
           <Tooltip title="Github">
@@ -259,7 +262,10 @@ const Sidebar: React.FC = () => {
             fontSize: "12px",
           }}
         >
-          <Typography fontSize={isSmallScreen ? '8px' : '12px'} color='rgb(255,255,255,.5)'>
+          <Typography
+            fontSize={isSmallScreen ? "8px" : "12px"}
+            color="rgb(255,255,255,.5)"
+          >
             Copyright © 2024, Emir Mutlu, All rights reserved.
           </Typography>
         </Box>

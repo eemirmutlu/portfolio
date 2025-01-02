@@ -114,16 +114,16 @@ const Sidebar: React.FC = () => {
                 width: isSmallScreen ? 50 : 100,
                 height: isSmallScreen ? 50 : 100,
                 marginBottom: 2,
-                border: isDarkMode
-                  ? "5px solid rgb(128, 0, 128, .2)"
-                  : "5px solid white",
+                boxShadow: isDarkMode
+                  ? "0px 0px 10px rgb(128, 0, 128)"
+                  : "0px 0px 10px white",
               }}
             />
           </Tooltip>
           <Typography
-            variant="h6"
+            variant="h2"
             gutterBottom
-            sx={{ marginLeft: 2, fontSize: isSmallScreen ? "16px" : "" }}
+            sx={{ marginLeft: 2, fontSize: isSmallScreen ? "20px" : "24px" }}
           >
             {user.login ? user.login : "Undefined"}
           </Typography>

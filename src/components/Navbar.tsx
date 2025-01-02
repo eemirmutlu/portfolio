@@ -104,12 +104,15 @@ const Navbar: React.FC = () => {
             alt={user?.login || ""}
             src={user?.avatar_url || ""}
             sx={{
-              width: 70,
-              height: 70,
-              // border: "5px solid white",
-              border: isDarkMode
-                ? "5px solid rgb(128, 0, 128, .2)"
-                : "5px solid white",
+              width: 80,
+              height: 80,
+              // border: isDarkMode
+              //   ? "5px solid rgb(128, 0, 128, .2)"
+              //   : "5px solid white",
+
+              boxShadow: isDarkMode
+                ? "0px 0px 10px rgb(128, 0, 128)"
+                : "0px 0px 10px white",
             }}
           />
         </Tooltip>

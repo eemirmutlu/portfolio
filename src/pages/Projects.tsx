@@ -100,34 +100,38 @@ const Projects: React.FC = () => {
           {selectedRepo
             ? `${selectedRepo.name} • Emir Mutlu`
             : isLoading
-            ? "Loading..."
-            : "Projects • Emir Mutlu"}
+            ? "Loading... | Emir Mutlu"
+            : "Projeler • Emir Mutlu"}
         </title>
 
         <meta
           name="description"
           content={
             selectedRepo
-              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar ve kaynak kodları için tıklayın.`
-              : "Emir Mutlu'nun yazılım geliştirme projelerini keşfedin. React, frontend, ve yazılım mühendisliği konularında deneyimlerimi paylaşan projeler."
+              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar ve kaynak kodları için tıklayın. Yazılım geliştirme ve frontend projeleri hakkında bilgi edinin.`
+              : "Emir Mutlu'nun yazılım geliştirme projelerini keşfedin. React, frontend, yazılım mühendisliği konularında deneyimlerimi ve projelerimi burada bulabilirsiniz."
           }
         />
 
         <meta
           name="keywords"
-          content="Emir Mutlu, yazılım geliştirme, React projeleri, frontend geliştirme, yazılım mühendisliği, yazılım projeleri"
+          content="Emir Mutlu, yazılım geliştirici, frontend geliştirici, yazılım mühendisliği, React projeleri, yazılım projeleri, yazılım portföyü, Emir Mutlu projeleri, frontend projeleri, yazılım mühendisliği projeleri"
         />
 
         <meta
           property="og:title"
-          content={selectedRepo ? selectedRepo.name : "Projects • Emir Mutlu"}
+          content={
+            selectedRepo
+              ? `${selectedRepo.name} • Emir Mutlu`
+              : "Projeler • Emir Mutlu"
+          }
         />
         <meta
           property="og:description"
           content={
             selectedRepo
-              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar için tıklayın.`
-              : "Emir Mutlu'nun yazılım geliştirme projeleri hakkında bilgi edinin."
+              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar ve kaynak kodları için tıklayın. Yazılım geliştirme projeleri hakkında bilgi edinin.`
+              : "Emir Mutlu'nun yazılım geliştirme projeleri hakkında bilgi edinin. Frontend, React, yazılım mühendisliği ve daha fazlası."
           }
         />
         <meta property="og:image" content="/logo2.png" />
@@ -139,22 +143,31 @@ const Projects: React.FC = () => {
               : "https://emirmutlu.me/projects"
           }
         />
+        <meta property="og:type" content="website" />
 
         <meta
           name="twitter:title"
-          content={selectedRepo ? selectedRepo.name : "Projects • Emir Mutlu"}
+          content={
+            selectedRepo
+              ? `${selectedRepo.name} • Emir Mutlu`
+              : "Projeler • Emir Mutlu"
+          }
         />
         <meta
           name="twitter:description"
           content={
             selectedRepo
-              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar için tıklayın.`
-              : "Emir Mutlu'nun yazılım geliştirme projeleri hakkında bilgi edinin."
+              ? `Projelerimden biri olan ${selectedRepo.name}. Ayrıntılar ve kaynak kodları için tıklayın.`
+              : "Emir Mutlu'nun yazılım geliştirme projeleri hakkında bilgi edinin. React ve frontend geliştirme konularındaki projelerimi keşfedin."
           }
         />
         <meta name="twitter:image" content="/logo2.png" />
         <meta name="twitter:card" content="summary_large_image" />
+
+        <meta name="theme-color" content="#000000" />
+        <meta property="og:site_name" content="Emir Mutlu" />
       </Helmet>
+
       <Box sx={{ textAlign: "center", mb: 4 }}>
         {isLoading ? (
           <>

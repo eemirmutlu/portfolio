@@ -132,7 +132,7 @@ const Sidebar: React.FC = () => {
           variant="body2"
           color="text.secondary"
           sx={{
-            color: "white",
+            color: "rgba(255,255,255,.7)",
             borderRadius: location.pathname === "/" ? "0px 0px 12px 0px" : "",
             backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple",
             padding: "24px",

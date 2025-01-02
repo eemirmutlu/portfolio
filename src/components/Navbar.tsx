@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
           <Typography
             sx={{
               marginLeft: 2,
-              color: "white",
+              color: "rgba(255,255,255,.7)",
               fontSize: isSmallScreen ? "10px" : "15px",
             }}
           >

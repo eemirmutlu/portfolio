@@ -7,7 +7,7 @@ import {
   IconButton,
   Box,
   MenuItem,
-  Popover,
+  Menu,
 } from "@mui/material";
 import { useThemeContext } from "../contexts/ThemeContext";
 import DocumentViewer from "../components/DocumentViewer";
@@ -31,6 +31,8 @@ const skills = [
     descriptionEn: "Experienced with ES6+ features and frameworks like React.",
     descriptionTr:
       "ES6+ özellikleri ve React gibi frameworklerle deneyimliyim.",
+    descriptionDe:
+      "Ich habe Erfahrung mit ES6+ Features und Frameworks wie React.",
   },
   {
     name: "React",
@@ -38,6 +40,8 @@ const skills = [
     descriptionEn: "Skilled in building responsive and dynamic UIs with React.",
     descriptionTr:
       "React ile duyarlı ve dinamik kullanıcı arayüzleri oluşturma konusunda yetenekliyim.",
+    descriptionDe:
+      "Ich bin in der Lage, mit React responsive und dynamische Benutzeroberflächen zu erstellen.",
   },
   {
     name: "TypeScript",
@@ -46,18 +50,24 @@ const skills = [
       "Strong understanding of TypeScript's type system and tooling.",
     descriptionTr:
       "TypeScript'in type sistemi ve araçları konusunda güçlü bir anlayışa sahibim.",
+    descriptionDe:
+      "Ich habe ein fundiertes Verständnis des Typsystems und der Tools von TypeScript.",
   },
   {
     name: "CSS",
     level: 90,
     descriptionEn: "Proficient in CSS, Sass, and responsive design techniques.",
     descriptionTr: "CSS, Sass ve duyarlı tasarım tekniklerinde yetkinim.",
+    descriptionDe:
+      "Ich bin versiert in CSS, Sass und Techniken des responsiven Designs.",
   },
   {
     name: "Python",
     level: 60,
     descriptionEn: "Good understanding of Python for backend and scripting.",
     descriptionTr: "Backend ve Script yazımı için Python konusunda yetkinim.",
+    descriptionDe:
+      "Ich bin versiert in Python für Backend-Entwicklung und Skripterstellung.",
   },
   {
     name: "Visual Basic",
@@ -66,6 +76,8 @@ const skills = [
       "Proficient in using Office programs effectively with Visual Basic.",
     descriptionTr:
       "Visual Basic ile Office programlarını etkin bir şekilde kullanabilirim.",
+    descriptionDe:
+      "Ich kann Office-Programme effektiv mit Visual Basic nutzen.",
   },
 ];
 
@@ -79,7 +91,7 @@ const Home: React.FC = () => {
   const [displayText, setDisplayText] = useState("");
   const [speed] = useState(200);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { language, toggleLanguage } = useLanguageContext();
+  const { language, setLanguage } = useLanguageContext();
 
   const staticText = "H";
   const dynamicText = "ello Welcome to my Portfolio";
@@ -124,11 +136,13 @@ const Home: React.FC = () => {
     setOpenViewer(false);
   };
 
-  const handleLanguageChange = (lang: string) => {
-    if (lang !== language) {
-      toggleLanguage();
-    }
+  const handlePopoverClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLanguageChange = (lang: string) => {
+    setLanguage(lang); // Dil değiştirme işlemi
+    handlePopoverClose(); // Popover'ı kapatma
   };
 
   return (
@@ -150,8 +164,20 @@ const Home: React.FC = () => {
           {openViewer
             ? `${documentData.title} • Emir Mutlu`
             : isLoading
-            ? "Loading... | Emir Mutlu"
-            : "Ana Sayfa • Emir Mutlu"}
+            ? `${
+                language === "tr"
+                  ? "Yükleniyor..."
+                  : language === "de"
+                  ? "Laden..."
+                  : "Loading..."
+              } | Emir Mutlu`
+            : `${
+                language === "tr"
+                  ? "Ana Sayfa"
+                  : language === "de"
+                  ? "Homepage"
+                  : "Home"
+              } • Emir Mutlu`}
         </title>
 
         <meta
@@ -250,7 +276,7 @@ const Home: React.FC = () => {
             <LanguageOutlined sx={{ color: isDarkMode ? "#fff" : "purple" }} />
           </IconButton>
 
-          <Popover
+          <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={() => setAnchorEl(null)}
@@ -261,27 +287,26 @@ const Home: React.FC = () => {
             <MenuItem onClick={() => handleLanguageChange("tr")}>
               Türkçe
             </MenuItem>
-          </Popover>
+            <MenuItem onClick={() => handleLanguageChange("de")}>
+              Deutsch
+            </MenuItem>
+          </Menu>
           <Typography
             variant="h2"
             sx={{
-              mb: 2,
-              display: "inline-block",
+              mb: isSmallScreen ? 4 : 2,
+              mt: isSmallScreen ? 2 : "",
               overflow: "hidden",
-              whiteSpace: "nowrap",
               borderRight: "3px solid",
               animation: "blink 0.75s step-end infinite",
-              color: isDarkMode ? "#4C4A7E" : "#6A61A1", // Dark navy or purple
-              fontSize: isSmallScreen ? "1.5rem" : "2.5rem",
-              width: "auto", // Center align text
-              position: "relative", // Ensure proper positioning
+              color: isDarkMode ? "#4C4A7E" : "#6A61A1",
+              fontSize: isSmallScreen ? "1rem" : "2.5rem",
               textAlign: "start",
             }}
           >
             {displayText}
             <Box
               sx={{
-                position: "absolute",
                 right: 0,
                 top: "0",
                 height: "100%",
@@ -332,13 +357,47 @@ const Home: React.FC = () => {
                 dillerine hakimim ve her iki dili de akıcı bir şekilde
                 konuşabiliyorum.
               </>
+            ) : language === "de" ? (
+              <>
+                Hallo, ich bin Emir. Lassen Sie mich mich vorstellen. Ich wurde
+                2003 in{" "}
+                <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
+                  der Türkei
+                </b>{" "}
+                geboren und interessiere mich derzeit für{" "}
+                <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
+                  Softwareentwicklung.
+                </b>{" "}
+                Zu meinen Hobbys gehören das Anschauen von Filmen und das
+                Verfolgen sowie die Teilnahme an Sportarten wie Fußball und
+                Basketball. Zurzeit arbeite ich als Frontend-Entwickler in einem
+                Softwareunternehmen in der Stadt, in der ich wohne. Dank meines
+                Teams strebe ich an, mich weiterzuentwickeln und schließlich in
+                größeren Unternehmen und Projekten tätig zu sein. Gleichzeitig
+                setze ich mein Studium im Bereich Ökonometrie an der
+                Uludağ-Universität fort. Neben den Fähigkeiten, die ich durch
+                mein Studium erlangt habe, habe ich mir JavaScript selbst
+                beigebracht und mich auf Frontend-Entwicklung spezialisiert. Das
+                Schreiben von Frontend-Code bereitet mir große Freude, und ich
+                möchte mich diesem Bereich widmen, während ich professionell
+                wachse und mich weiterentwickle. Ich beherrsche sowohl die{" "}
+                <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
+                  englische
+                </b>{" "}
+                als auch die{" "}
+                <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
+                  türkische
+                </b>{" "}
+                Sprache fließend und kann mich in beiden Sprachen problemlos
+                verständigen.
+              </>
             ) : (
               <>
                 Hello, I'm Emir. Let me introduce myself. I was born in{" "}
                 <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
                   Turkey
                 </b>{" "}
-                in 2003, and I am currently interested in{""}
+                in 2003, and I am currently interested in{" "}
                 <b style={{ color: isDarkMode ? "#6A61A1" : "#4C4A7E" }}>
                   software development
                 </b>{" "}
@@ -390,7 +449,11 @@ const Home: React.FC = () => {
               alignSelf: "flex-start",
             }}
           >
-            {language === "tr" ? "CV Görüntüle" : "View CV"}
+            {language === "tr"
+              ? "CV Görüntüle"
+              : language === "de"
+              ? "Sicht CV"
+              : "View CV"}
           </Button>
 
           <DocumentViewer
@@ -412,7 +475,11 @@ const Home: React.FC = () => {
             }}
           >
             <Typography variant="h4" sx={{ marginBottom: 4 }}>
-              {language === "tr" ? "Yeteneklerim" : "My Skills"}
+              {language === "tr"
+                ? "Yeteneklerim"
+                : language === "de"
+                ? "Meine Fähigkeiten"
+                : "My Skills"}
             </Typography>
 
             <Box
@@ -432,6 +499,8 @@ const Home: React.FC = () => {
                   description={
                     language === "tr"
                       ? skill.descriptionTr
+                      : language === "de"
+                      ? skill.descriptionDe
                       : skill.descriptionEn
                   }
                 />

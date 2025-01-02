@@ -161,7 +161,11 @@ const Sidebar: React.FC = () => {
           }}
           disableRipple
         >
-          {language === "tr" ? "Ana Sayfa" : "Home"}
+          {language === "tr"
+            ? "Ana Sayfa"
+            : language === "de"
+            ? "Homepage"
+            : "Home"}
         </Button>
         <Button
           className={
@@ -183,7 +187,11 @@ const Sidebar: React.FC = () => {
           }}
           disableRipple
         >
-          {language === "tr" ? "Projeler" : "Projects"}
+          {language === "tr"
+            ? "Projeler"
+            : language === "de"
+            ? "Projekte"
+            : "Projects"}
         </Button>
 
         <Box
@@ -266,7 +274,11 @@ const Sidebar: React.FC = () => {
             fontSize={isSmallScreen ? "8px" : "12px"}
             color="rgb(255,255,255,.5)"
           >
-            Copyright © 2024, Emir Mutlu, All rights reserved.
+            {language === "tr"
+              ? "Copyright © 2024, Emir Mutlu, Tüm hakları saklıdır."
+              : language === "de"
+              ? "Copyright © 2024, Emir Mutlu, Alle Rechte vorbehalten."
+              : "Copyright © 2024, Emir Mutlu, All rights reserved."}
           </Typography>
         </Box>
       </Box>

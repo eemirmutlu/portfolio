@@ -15,7 +15,7 @@ import {
   IconButton,
   Stack,
   MenuItem,
-  Popover,
+  Menu,
 } from "@mui/material";
 import ProjectViewer from "../components/ProjectViewer";
 import ErrorPage from "../components/ErrorPage";
@@ -42,7 +42,7 @@ const Projects: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useThemeContext();
   const [isNotFound, setIsNotFound] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { language, toggleLanguage } = useLanguageContext();
+  const { language, setLanguage } = useLanguageContext();
 
   useEffect(() => {
     const loadRepositories = async () => {
@@ -98,11 +98,13 @@ const Projects: React.FC = () => {
     return <ErrorPage />;
   }
 
-  const handleLanguageChange = (lang: string) => {
-    if (lang !== language) {
-      toggleLanguage();
-    }
+  const handlePopoverClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLanguageChange = (lang: string) => {
+    setLanguage(lang); // Dil değiştirme işlemi
+    handlePopoverClose(); // Popover'ı kapatma
   };
 
   return (
@@ -112,8 +114,20 @@ const Projects: React.FC = () => {
           {selectedRepo
             ? `${selectedRepo.name} • Emir Mutlu`
             : isLoading
-            ? "Loading... | Emir Mutlu"
-            : "Projeler • Emir Mutlu"}
+            ? `${
+                language === "tr"
+                  ? "Yükleniyor..."
+                  : language === "de"
+                  ? "Laden..."
+                  : "Loading..."
+              } | Emir Mutlu`
+            : `${
+                language === "tr"
+                  ? "Projeler"
+                  : language === "de"
+                  ? "Projekte"
+                  : "Projects"
+              } • Emir Mutlu`}
         </title>
 
         <meta
@@ -228,7 +242,11 @@ const Projects: React.FC = () => {
                 color: isDarkMode ? "white" : "purple",
               }}
             >
-              {language === "tr" ? "Projelerim" : "My Projects"}
+              {language === "tr"
+                ? "Projelerim"
+                : language === "de"
+                ? "Meine Projekte"
+                : "My Projects"}
             </Typography>
             <Box>
               <IconButton onClick={(event) => setAnchorEl(event.currentTarget)}>
@@ -237,7 +255,7 @@ const Projects: React.FC = () => {
                 />
               </IconButton>
 
-              <Popover
+              <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
@@ -248,7 +266,10 @@ const Projects: React.FC = () => {
                 <MenuItem onClick={() => handleLanguageChange("tr")}>
                   Türkçe
                 </MenuItem>
-              </Popover>
+                <MenuItem onClick={() => handleLanguageChange("de")}>
+                  Deutsch
+                </MenuItem>
+              </Menu>
               <IconButton onClick={toggleDarkMode}>
                 {isDarkMode ? (
                   <LightModeIcon sx={{ color: "#fff" }} />
@@ -375,6 +396,8 @@ const Projects: React.FC = () => {
                       >
                         {repo.description || language === "tr"
                           ? "Açıklama bulunmuyor."
+                          : language === "de"
+                          ? "Keine Beschreibung vorhanden."
                           : "No description available."}
                       </Typography>
                       <Box>

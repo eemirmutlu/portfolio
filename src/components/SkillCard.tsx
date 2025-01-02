@@ -74,7 +74,13 @@ const SkillCard: React.FC<{
             variant="body2"
             sx={{ color: isDarkMode ? "#bbbbbb" : "text.secondary" }}
           >
-            {`${language === "tr" ? "Seviye" : "Proficiency"}: ${level}%`}
+            {`${
+              language === "tr"
+                ? "Seviye"
+                : language === "de"
+                ? "Kompetenz"
+                : "Proficiency"
+            }: ${level}%`}
           </Typography>
 
           <Collapse in={open}>

@@ -8,10 +8,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useThemeContext } from "../contexts/ThemeContext";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 const Footer: React.FC = () => {
   const { isDarkMode } = useThemeContext();
   const [isLoading, setIsLoading] = useState(true);
+  const { language } = useLanguageContext();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -84,9 +86,17 @@ const Footer: React.FC = () => {
       </Box>
       <Typography
         variant="body2"
-        sx={{ color: "rgb(255,255,255,.5)", textAlign: "center", marginTop: "16px" }}
+        sx={{
+          color: "rgb(255,255,255,.5)",
+          textAlign: "center",
+          marginTop: "16px",
+        }}
       >
-        Copyright © 2024, Emir Mutlu, All rights reserved.
+        {language === "tr"
+          ? "Copyright © 2024, Emir Mutlu, Tüm hakları saklıdır."
+          : language === "de"
+          ? "Copyright © 2024, Emir Mutlu, Alle Rechte vorbehalten."
+          : "Copyright © 2024, Emir Mutlu, All rights reserved."}
       </Typography>
     </Box>
   );

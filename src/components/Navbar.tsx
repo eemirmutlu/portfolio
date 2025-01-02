@@ -10,6 +10,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useThemeContext } from "../contexts/ThemeContext";
 import NavbarSkeleton from "./NavbarSkeleton";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 interface User {
   login: string;
@@ -27,11 +28,7 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const isSmallScreen = useMediaQuery("(max-width:450px)");
   const { isDarkMode } = useThemeContext();
-  // const clickSound = new Audio("../public/click.mp3");
-
-  // const playClickSound = () => {
-  //   clickSound.play();
-  // };
+  const { language } = useLanguageContext();
 
   useEffect(() => {
     const loadUser = async () => {
@@ -137,7 +134,6 @@ const Navbar: React.FC = () => {
       </Box>
       <Box sx={{ display: "flex" }}>
         <Button
-          // className={location.pathname === "/" ? "active" : ""}
           className={
             location.pathname === "/"
               ? isDarkMode
@@ -151,7 +147,7 @@ const Navbar: React.FC = () => {
             height: 100,
             textAlign: "left",
             color: "white",
-            // backgroundColor: "purple",
+            fontSize: language === "tr" ? "8px" : "10px",
             backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             transition: "background-color linear 0.2s",
             borderRadius:
@@ -159,10 +155,13 @@ const Navbar: React.FC = () => {
           }}
           disableRipple
         >
-          Home
+          {language === "tr"
+            ? "Ana Sayfa"
+            : language === "de"
+            ? "Homepage"
+            : "Home"}
         </Button>
         <Button
-          // className={location.pathname === "/projects" ? "active" : ""}
           className={
             location.pathname === "/projects"
               ? isDarkMode
@@ -176,14 +175,19 @@ const Navbar: React.FC = () => {
             height: 100,
             textAlign: "center",
             color: "white",
-            // backgroundColor: "purple",
+            fontSize: language === "de" ? "10px" : "10px",
+
             backgroundColor: isDarkMode ? "rgb(128, 0, 128, .2)" : "purple", // 128 0 128
             transition: "background-color linear 0.2s",
             borderRadius: location.pathname === "/" ? "0px 0px 0px 24px" : "",
           }}
           disableRipple
         >
-          Projects
+          {language === "tr"
+            ? "Projeler"
+            : language === "de"
+            ? "Projekte"
+            : "Projects"}
         </Button>
       </Box>
     </Box>

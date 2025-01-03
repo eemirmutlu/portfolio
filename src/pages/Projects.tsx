@@ -394,7 +394,9 @@ const Projects: React.FC = () => {
                             : "rgb(0, 0, 0, .7)",
                         }}
                       >
-                        {repo.description || language === "tr"
+                        {repo.description
+                          ? repo.description
+                          : language === "tr"
                           ? "Açıklama bulunmuyor."
                           : language === "de"
                           ? "Keine Beschreibung vorhanden."

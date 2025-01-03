@@ -6,7 +6,7 @@ button.active {
 }
 
 button.dark-mode-active {
-  background-color: #1E1B29;
+  background-color: #1e1b29;
   color: white;
 }
 
@@ -62,17 +62,15 @@ b {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: #e0b2ff;
-  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #7a4c99;
-  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

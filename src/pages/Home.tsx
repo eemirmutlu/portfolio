@@ -30,7 +30,7 @@ const skills = [
     level: 70,
     descriptionEn: "Experienced with ES6+ features and frameworks like React.",
     descriptionTr:
-      "ES6+ özellikleri ve React gibi frameworklerle deneyimliyim.",
+      "ES6+ özellikleri ve React gibi frameworklerle deneyimliyim.  ",
     descriptionDe:
       "Ich habe Erfahrung mit ES6+ Features und Frameworks wie React.",
   },
